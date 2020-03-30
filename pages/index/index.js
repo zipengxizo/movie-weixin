@@ -1,10 +1,10 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+let template = require('../template/template.js');
 Page({
   data: {
-    motto: 'movie',
+    motto: 'movie111',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -16,6 +16,7 @@ Page({
     })
   },
   onLoad: function () {
+    template.tabbar("tabBar", 0, this);
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
