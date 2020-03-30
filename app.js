@@ -1,4 +1,6 @@
 //app.js
+let tabBar = require('./pages/template/template');
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -35,6 +37,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    host : "http://39.97.33.178/api/"
+    host : "http://39.97.33.178/api/",
+    tabBar : tabBar
   }
 })

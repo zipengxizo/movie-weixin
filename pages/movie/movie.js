@@ -1,13 +1,13 @@
 
-let template = require('../template/template.js');
+
 import api from "../../utils/http.js";
+const app = getApp();
 Page({
   data:{
     movieList : []
-
   },
   onLoad : function(){
-    template.tabbar("tabBar", 0, this);
+    app.globalData.tabBar.tabbar("tabBar",0,this);
     let that = this;
     api.get("movieOnInfoList?cityId=10").then((res)=>{
       let movieList = res.data.data.movieList;

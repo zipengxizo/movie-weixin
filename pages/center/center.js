@@ -1,9 +1,9 @@
-let template = require("../template/template.js");
+const app = getApp();
 Page({
   data : {
 
   },
   onLoad : function(){
-    template.tabbar("tabBar", 2, this);
+    app.globalData.tabBar.tabbar("tabBar",2,this);
   }
 });

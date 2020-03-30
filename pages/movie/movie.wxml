@@ -1,9 +1,6 @@
-<import src="../template/template.wxml"/>
-<template is="tabBar" data="{{tabBar:bindData.tabBar}}"></template>
+
 <view id="main">
-		<view id="header">
-			<view class="title">电影</view>
-		</view>
+		<header title="电影"></header>
 		<view id="content">
 			<view class="movie_menu">
 				<view class="city_name">
@@ -19,18 +16,6 @@
 			</view>
 			<view class="movie_body">
 				<view class="movie_ul">
-					<!-- <view class="movie_li">
-						<view class="pic_show"><image class="img" src="/imgs/movie_1.jpg"></image></view>
-						<view class="info_list">
-							<view class="info_h">无名之辈</view>
-							<view class="info_p"><text class="person">17746</text> 人想看</view>
-							<view class="info_p">主演: 陈建斌,任素汐,潘斌龙</view>
-							<view class="info_p">2018-11-30上映</view>
-						</view>
-						<view class="btn_pre">
-							预售
-						</view>
-					</view> -->
 				</view>
 					<view class="movie_ul">
 						<view class="movie_li" wx:for="{{movieList}}" wx:key="id">
@@ -48,4 +33,5 @@
 				</view>
 			</view>
 		</view>
+		<footer tabBar="{{tabBar}}"></footer>
 	</view>

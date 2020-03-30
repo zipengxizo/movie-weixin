@@ -32,8 +32,8 @@ function tabbarinit() {
    var otabbar = tabbarinit();
    otabbar[id]['iconPath'] = otabbar[id]['selectedIconPath']//换当前的icon
    otabbar[id]['current'] = 1;
-   bindData[bindName] = otabbar
-   that.setData({ bindData });
+  //  bindData[bindName] = otabbar
+   that.setData({ tabBar : otabbar });
  }
  
  module.exports = {

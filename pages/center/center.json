@@ -1,3 +1,6 @@
 {
-  
+  "usingComponents" : {
+    "header" : "../component/header/header",
+    "footer" : "../component/tabbar/tabbar"
+  }
 }
