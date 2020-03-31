@@ -1,5 +1,5 @@
 //app.js
-let tabBar = require('./pages/template/template');
+// let tabBar = require('./pages/template/template');
 
 App({
   onLaunch: function () {
@@ -38,6 +38,6 @@ App({
   globalData: {
     userInfo: null,
     host : "http://39.97.33.178/api/",
-    tabBar : tabBar
+    // tabBar : tabBar
   }
 })

@@ -33,5 +33,4 @@
 				</view>
 			</view>
 		</view>
-		<footer tabBar="{{tabBar}}"></footer>
 	</view>

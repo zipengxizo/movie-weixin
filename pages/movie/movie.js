@@ -7,9 +7,12 @@ Page({
     movieList : []
   },
   onLoad : function(){
-    app.globalData.tabBar.tabbar("tabBar",0,this);
+    wx.showLoading({
+      title: '加载中',
+    });
     let that = this;
     api.get("movieOnInfoList?cityId=10").then((res)=>{
+      wx.hideLoading();
       let movieList = res.data.data.movieList;
       let changeMovieList = movieList.map((item)=>{
         item.img = item.img.replace(/w\.h/,'128.180');

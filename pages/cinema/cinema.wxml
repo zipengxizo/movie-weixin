@@ -3,6 +3,35 @@
 
 <view id="main">
     <header title="影院"></header>
-	<footer tabBar="{{tabBar}}"></footer>
+    <view id="content">
+    <view class="cinema_menu">
+        <view class="city_switch">
+            全城 <i class="iconfont icon-lower-triangle"></i>
+        </view>
+        <view class="brand_swtich">
+            品牌 <i class="iconfont icon-lower-triangle"></i>
+        </view>
+        <view class="feature_switch">
+            特色 <i class="iconfont icon-lower-triangle"></i>
+        </view>
+    </view>
+    <view class="cinema_body">
+        <view class="ul">
+            <view class="li" wx:for="{{cinemaList}}" wx:key="index" wx:for-index="index" wx:for-item="item" >
+                <view class="div">
+                    <text class="cinema-name">{{ item.nm }}</text>
+                    <text class="q"><text class="price">{{item.sellPrice}}</text> 元起</text>
+                </view>
+                <view class="address div">
+                    <text>{{item.addr}}</text>
+                    <text>{{item.distance}}</text>
+                </view>
+                <view class="card div">
+                    <view class="card-item {{tag.classn}}" wx:for="{{item.showTag}}" wx:key="index2" wx:for-item="tag" wx:for-index="index2">{{tag.text}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
     
 </view>
