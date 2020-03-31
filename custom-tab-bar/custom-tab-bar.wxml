@@ -1,0 +1,26 @@
+<view class="movie_menu">
+
+  <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <view class="city_name {{selected === index ? 'active' : ''}}" wx:if="{{index === 0}}">
+      <text class="location_name">大连</text><i class="iconfont icon-lower-triangle"></i>
+    </view>
+    <view class="hot_swtich" wx:elif="{{index === 1}}">
+      <view class="hot_item {{selected === index ? 'active' : ''}}">{{item.text}}</view>
+    </view>
+    
+    <view class="hot_swtich" wx:elif="{{index === 2}}">
+      <view class="hot_item {{selected === index ? 'active' : ''}}">{{item.text}}</view>
+    </view>
+    <view class="search_entry {{selected === index ? 'active' : ''}}" wx:elif="{{index === 3}}">
+      <i class="iconfont icon-sousuo icon-search"></i>
+    </view>
+  </cover-view>
+</view>
+<!-- 
+<cover-view class="tab-bar">
+  <cover-view class="tab-bar-border"></cover-view>
+  <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <cover-image class="cover-image" src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
+    <cover-view class="cover-view" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</cover-view>
+  </cover-view>
+</cover-view> -->

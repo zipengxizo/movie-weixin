@@ -6,13 +6,13 @@
     <view id="content">
     <view class="cinema_menu">
         <view class="city_switch">
-            全城 <i class="iconfont icon-lower-triangle"></i>
+            <text class="text">全城</text> <i class="iconfont icon-lower-triangle"></i>
         </view>
         <view class="brand_swtich">
-            品牌 <i class="iconfont icon-lower-triangle"></i>
+           <text class="text">品牌</text> <i class="iconfont icon-lower-triangle"></i>
         </view>
         <view class="feature_switch">
-            特色 <i class="iconfont icon-lower-triangle"></i>
+            <text class="text">特色</text> <i class="iconfont icon-lower-triangle"></i>
         </view>
     </view>
     <view class="cinema_body">

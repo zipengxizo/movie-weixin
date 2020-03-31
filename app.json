@@ -4,9 +4,11 @@
     "pages/cinema/cinema",
     "pages/center/center",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/comingmoive/comingmoive"
   ],
   "tabBar": {
+    "custom": true,
     "color": "#8a8a8a",
     "selectedColor": "#f40",
     "backgroundColor": "#ffffff",
@@ -33,6 +35,16 @@
         "iconPath": "/imgs/category.png",
         "selectedIconPath": "/imgs/category_on.png",
         "text": "我的"
+      }, {
+        "pagePath": "pages/movie/movie",
+        "iconPath": "/imgs/message.png",
+        "selectedIconPath": "/imgs/message_on.png",
+        "text": "正在热映"
+      }, {
+        "pagePath": "pages/comingmoive/comingmoive",
+        "iconPath": "/imgs/message.png",
+        "selectedIconPath": "/imgs/message_on.png",
+        "text": "即将上映"
       }]
   },
   "window": {
