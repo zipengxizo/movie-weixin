@@ -29,7 +29,6 @@ Page({
         item.showTag = changeTags;
         return item;
       });
-      console.log(changeCinemaList);
       that.setData({
         cinemaList : changeCinemaList
       });

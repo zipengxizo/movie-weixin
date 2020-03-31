@@ -4,7 +4,7 @@
 		<view id="content">
 			<view class="movie_menu">
 				<view class="city_name">
-					<text>大连</text><i class="iconfont icon-lower-triangle"></i>
+					<text class="location_name">大连</text><i class="iconfont icon-lower-triangle"></i>
 				</view>
 				<view class="hot_swtich">
 					<view class="hot_item">正在热映</view>
