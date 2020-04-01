@@ -2,5 +2,5 @@
 <template is="tabBar" data="{{tabBar:bindData.tabBar}}"></template>
 
 <view id="main">
-    <header title="个人中心"></header>
+    <!-- <header title="个人中心"></header> -->
 </view>

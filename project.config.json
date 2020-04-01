@@ -24,7 +24,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
+	"libVersion": "2.10.3",
 	"appid": "wx2fabe09bd81eee32",
 	"projectname": "movie",
 	"debugOptions": {

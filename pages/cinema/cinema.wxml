@@ -1,8 +1,6 @@
-<import src="../template/template.wxml"/>
-<template is="tabBar" data="{{tabBar:bindData.tabBar}}"></template>
 
 <view id="main">
-    <header title="影院"></header>
+    <!-- <header title="影院"></header> -->
     <view id="content">
     <view class="cinema_menu">
         <view class="city_switch">

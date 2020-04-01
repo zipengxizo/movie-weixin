@@ -1,10 +1,18 @@
-<view class="tabBar">
-  <block wx:for="{{tabBar}}" wx:for-item="item" wx:key="tabBar">
-    <view class="tabBar-item">
-      <navigator open-type="redirect" url="{{item.pagePath}}">
-        <view><image class="icon" src='{{item.iconPath}}'></image></view>
-        <view class="{{item.current== 1 ? 'tabBartext' :''}}">{{item.text}}</view>
-      </navigator>  
+<view class="movie_menu">
+
+  <view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <view class="city_name {{selected === index ? 'active' : ''}}" wx:if="{{index === 0}}">
+      <text class="location_name">大连</text><i class="iconfont icon-lower-triangle"></i>
     </view>
-  </block>
+    <view class="hot_swtich" wx:elif="{{index === 1}}">
+      <view class="hot_item {{selected === index ? 'active' : ''}}">{{item.text}}</view>
+    </view>
+    
+    <view class="hot_swtich" wx:elif="{{index === 2}}">
+      <view class="hot_item {{selected === index ? 'active' : ''}}">{{item.text}}</view>
+    </view>
+    <view class="search_entry {{selected === index ? 'active' : ''}}" wx:elif="{{index === 3}}">
+      <i class="iconfont icon-sousuo icon-search"></i>
+    </view>
+  </view>
 </view>

@@ -1,6 +1,6 @@
 {
   "usingComponents" :{
     "header" : "../component/header/header",
-    "tabbar" : "/custom-tab-bar/custom-tab-bar"
+    "tabbar" : "../component/tabbar/tabbar"
   }
 }

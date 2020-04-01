@@ -1,8 +1,7 @@
-
 <view id="main">
-		<header title="电影"></header>
-		<view id="content">
-			<!-- <view class="movie_menu">
+	<!-- <header title="电影"></header> -->
+	<view id="content">
+		<!-- <view class="movie_menu">
 				<view class="city_name">
 					<text class="location_name">大连</text><i class="iconfont icon-lower-triangle"></i>
 				</view>
@@ -14,24 +13,24 @@
 					<i class="iconfont icon-sousuo"></i>
 				</view>
 			</view> -->
-			<tabbar></tabbar>
-			<view class="movie_body">
-				<view class="movie_ul">
-				</view>
-					<view class="movie_ul">
-						<view class="movie_li" wx:for="{{movieList}}" wx:key="id">
-							<view class="pic_show"><image class="img" src="{{item.img}}"></image></view>
-							<view class="info_list">
-								<view class="info_h">{{item.nm}}</view>
-								<view class="info_p"><text class="person">{{item.wish}}</text> 人想看</view>
-								<view class="info_p">主演: {{item.star}}</view>
-								<view class="info_p">{{item.rt}}上映</view>
-							</view>
-							<view class="btn_pre">
-								预售
-							</view>
-						</view>
-				</view>
+		<tabbar bind:changeTabar="changeTabar"></tabbar>
+		<view class="movie_body">
+			<view class="movie_ul">
+				<view class="movie_li" wx:for="{{movieList}}" wx:key="id" bindtap="detail" data-movieid="{{item.id}}">
+					<view class="pic_show">
+						<image class="img" src="{{item.img}}"></image>
+					</view>
+					<view class="info_list">
+						<view class="info_h">{{item.nm}}-{{item.id}}</view>
+						<view class="info_p">{{item.wish}}人想看</view>
+						<view class="info_p">主演: {{item.star}}</view>
+						<view class="info_p">{{item.rt}}上映</view>
+					</view>
+					<view class="btn_pre">
+						预售
+					</view>
 			</view>
 		</view>
 	</view>
+</view>
+</view>
