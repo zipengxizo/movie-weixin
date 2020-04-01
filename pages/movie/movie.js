@@ -1,15 +1,20 @@
 import api from "../../utils/http.js";
-const app = getApp();
+import { url } from '../../utils/base.js'
 Page({
-  data:{
-    movieList : []
+  data: {
+    movieList: []
   },
-  onLoad : function(){
-    let url = "movieOnInfoList?cityId=10";
-    this.fetchOnMovie(url);
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading({
+      complete: (res) => { },
+    });
+    this.fetchOnMovie(url.movieOn, { cityId: 10 });
+
   },
-  onShow : function(){
-    console.log(this.getTabBar);
+  onLoad: function () {
+    this.fetchOnMovie(url.movieOn, { cityId: 10 });
+  },
+  onShow: function () {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
@@ -17,55 +22,57 @@ Page({
       })
     }
   },
-  changeTabar(e){
-    console.log(e.detail.index)
+  changeTabar(e) {
+    let params = { cityId: 10 };
     if (e.detail.index === 1) {
-      this.fetchOnMovie("movieOnInfoList?cityId=10");
-    }else if(e.detail.index === 2){
-      this.fetchComingMovie("movieComingList?cityId=10");
+      this.fetchOnMovie(url.movieOn, params);
+    } else if (e.detail.index === 2) {
+      this.fetchComingMovie(url.movieComing, params);
     }
   },
-  detail(e){
+  detail(e) {
     let movieid = e.currentTarget.dataset.movieid;
     wx.navigateTo({
-      url: '/pages/detail/detail?movieId='+movieid,
-      success : function(res){
-        res.eventChannel.emit('acceptMovieId', { data: {movieId : movieid} })
+      url: '/pages/detail/detail?movieId=' + movieid,
+      success: function (res) {
+        res.eventChannel.emit('acceptMovieId', { data: { movieId: movieid } })
       }
     })
   },
-  
-  fetchComingMovie(url){
+
+  fetchComingMovie(url, params) {
     wx.showLoading({
       title: '加载中',
     });
     let that = this;
-    api.get(url).then((res)=>{
+    api.get(url, params).then((res) => {
       wx.hideLoading();
       let movieList = res.data.data.comingList;
-      let changeMovieList = movieList.map((item)=>{
-        item.img = item.img.replace(/w\.h/,'128.180');
+      let changeMovieList = movieList.map((item) => {
+        item.img = item.img.replace(/w\.h/, '128.180');
         return item;
       });
-      that.setData({movieList : changeMovieList});
-    }).catch((err)=>{
+      that.setData({ movieList: changeMovieList });
+    }).catch((err) => {
       console.log(err);
     })
   },
-  fetchOnMovie(url){
+  fetchOnMovie(url, params) {
     wx.showLoading({
       title: '加载中',
     });
     let that = this;
-    api.get(url).then((res)=>{
+    api.get(url, params).then((res) => {
       wx.hideLoading();
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh()
       let movieList = res.data.data.movieList;
-      let changeMovieList = movieList.map((item)=>{
-        item.img = item.img.replace(/w\.h/,'128.180');
+      let changeMovieList = movieList.map((item) => {
+        item.img = item.img.replace(/w\.h/, '128.180');
         return item;
       });
-      that.setData({movieList : changeMovieList});
-    }).catch((err)=>{
+      that.setData({ movieList: changeMovieList });
+    }).catch((err) => {
     })
   }
 });

@@ -21,7 +21,7 @@
 						<image class="img" src="{{item.img}}"></image>
 					</view>
 					<view class="info_list">
-						<view class="info_h">{{item.nm}}-{{item.id}}</view>
+						<view class="info_h">{{item.nm}}</view>
 						<view class="info_p">{{item.wish}}人想看</view>
 						<view class="info_p">主演: {{item.star}}</view>
 						<view class="info_p">{{item.rt}}上映</view>
@@ -29,8 +29,8 @@
 					<view class="btn_pre">
 						预售
 					</view>
+				</view>
 			</view>
 		</view>
 	</view>
-</view>
 </view>

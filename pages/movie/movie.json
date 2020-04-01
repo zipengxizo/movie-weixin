@@ -2,5 +2,7 @@
   "usingComponents" :{
     "header" : "../component/header/header",
     "tabbar" : "../component/tabbar/tabbar"
-  }
+  },
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
 }
