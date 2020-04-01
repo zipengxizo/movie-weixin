@@ -1,5 +1,6 @@
 import api from "../../utils/http.js";
 import { url } from '../../utils/base.js'
+const app = getApp();
 Page({
   data: {
     movieList: []
@@ -12,7 +13,21 @@ Page({
 
   },
   onLoad: function () {
-    this.fetchOnMovie(url.movieOn, { cityId: 10 });
+    wx.showLoading({
+      title: '加载中...',
+    })
+    app.api2.getMovieOn({cityId : 10}).then((res) => {
+      wx.hideLoading();
+      let movieList = res.data.movieList;
+      let changeMovieList = movieList.map((item) => {
+        item.img = item.img.replace(/w\.h/, '128.180');
+        return item;
+      });
+      this.setData({ movieList: changeMovieList });
+    }).catch((err) => {
+      console.log(err);
+    });
+    // this.fetchOnMovie(url.movieOn, { cityId: 10 });
   },
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&

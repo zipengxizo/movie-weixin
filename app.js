@@ -1,6 +1,5 @@
-//app.js
-// let tabBar = require('./pages/template/template');
 
+import api from './utils/api.js';
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -38,6 +37,6 @@ App({
   globalData: {
     userInfo: null,
     host : "http://39.97.33.178/api/",
-    // tabBar : tabBar
-  }
+  },
+  api2 : new api()
 })
