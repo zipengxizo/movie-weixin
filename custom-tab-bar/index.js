@@ -36,10 +36,10 @@ Component({
   methods: {
     switchTab(e){
       const url = e.currentTarget.dataset.path;
-      console.log(url);
+      const index = e.currentTarget.dataset.index;
       wx.switchTab({url});
       this.setData({
-        selected: e.currentTarget.dataset.index
+        selected: index
       })
     }
   }

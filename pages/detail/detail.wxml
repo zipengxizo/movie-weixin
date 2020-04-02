@@ -1,5 +1,5 @@
 <view id="detailContrainer" class="slide-enter-active">
-	<view v-else id="content" class="contentDetail">
+	<view id="content" class="contentDetail">
 		<view class="detail_list">
 			<view class="detail_list_bg"></view>
 			<view class="detail_list_filter"></view>
@@ -19,13 +19,13 @@
 		</view>
 		<view class="detail_intro">
 			<view class="p">
-			{{ detailMovie.dra }}
+				{{ detailMovie.dra }}
 			</view>
 		</view>
 		<scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
 			<block wx:for="{{detailMovie.photos}}" wx:key="*this">
 				<image class="img" src="{{item}}" />
 			</block>
-        </scroll-view>
+		</scroll-view>
 	</view>
 </view>

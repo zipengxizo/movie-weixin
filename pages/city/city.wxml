@@ -1,0 +1,23 @@
+<view class="city_body">
+	<view class="city_list">
+		<view class="city_hot">
+			<view class="h2">热门城市</view>
+			<view class="ul clearfix">
+				<view class="li" wx:for="{{hotList}}" data-id="{{item.id}}" data-name="{{item.nm}}" bindtap="handleToCity" wx:key="id">{{item.nm}}</view>
+			</view>
+		</view>
+		<view class="city_sort">
+			<block wx:for="{{cityList}}" wx:key="index">
+				<view class="h2">{{item.index}}</view>
+				<view class="ul">
+					<view class="li" wx:for="{{item.list}}" data-id="{{itemCity.id}}" data-name="{{itemCity.nm}}" bindtap="handleToCity" wx:for-item="itemCity" wx:key="id">{{itemCity.nm}}</view>
+				</view>
+			</block>
+		</view>
+	</view>
+	<view class="city_index">
+		<view class="ul">
+			<view class="li" wx:for="{{cityList}}" wx:key="index">{{item.index}}</view>
+		</view>
+	</view>
+</view>

@@ -4,12 +4,23 @@ Page({
     cinemaList : [],
     cityId : 10
   },
+  onPullDownRefresh:function(){
+    this.fetchCinema({cityId : this.data.cityId});
+  },
   onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中...',
-    });
-    app.api2.getCinemas({cityId : this.data.cityId}).then((res)=>{
-      wx.hideLoading();
+    this.fetchCinema({cityId : this.data.cityId});
+  },
+  onShow : function(){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1
+      })
+    }
+
+  },
+  fetchCinema(params){
+    app.api2.getCinemas(params).then((res)=>{
       let cinemaList = res.data.cinemas;
       let changeCinemaList = cinemaList.map((item)=>{
         let tags = item.tag;
@@ -34,15 +45,6 @@ Page({
     }).catch((err)=>{
       console.log(err);
     });
-  },
-  onShow : function(){
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 1
-      })
-    }
-
   },
   classCard(key){
       var card = [

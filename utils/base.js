@@ -3,7 +3,8 @@ const url = {
     movieOn: "movieOnInfoList",
     movieComing: "movieComingList",
     movieDetail: "detailmovie",
-    cinemaList: "cinemaList"
+    cinemaList: "cinemaList",
+    cityList: "cityList"
 }
 module.exports = {
     baseUrl,

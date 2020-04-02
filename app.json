@@ -6,17 +6,19 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/comingmoive/comingmoive",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/city/city"
   ],
   "tabBar": {
-    "custom" : true,
+    "custom": true,
     "color": "#8a8a8a",
     "selectedColor": "#f40",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
-    "position" : "bottom",
+    "position": "bottom",
     "list": [
-      { "current":0,
+      {
+        "current": 0,
         "pagePath": "pages/movie/movie",
         "iconPath": "/imgs/home.png",
         "selectedIconPath": "/imgs/home_on.png",
@@ -28,7 +30,6 @@
         "iconPath": "/imgs/message.png",
         "selectedIconPath": "/imgs/message_on.png",
         "text": "影院"
-
       },
       {
         "current": 0,
@@ -36,7 +37,8 @@
         "iconPath": "/imgs/category.png",
         "selectedIconPath": "/imgs/category_on.png",
         "text": "我的"
-      }]
+      }
+    ]
   },
   "usingComponents": {},
   "window": {

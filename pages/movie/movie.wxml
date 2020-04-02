@@ -13,7 +13,7 @@
 					<i class="iconfont icon-sousuo"></i>
 				</view>
 			</view> -->
-		<tabbar bind:changeTabar="changeTabar"></tabbar>
+		<tabbar bind:changeTabar="changeTabar" cityName="{{cityName}}"></tabbar>
 		<view class="movie_body">
 			<view class="movie_ul">
 				<view class="movie_li" wx:for="{{movieList}}" wx:key="id" bindtap="detail" data-movieid="{{item.id}}">

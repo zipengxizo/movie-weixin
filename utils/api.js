@@ -22,8 +22,15 @@ class api {
   /**
    * 统一的异常处理方法
    */
-  errorHander(res) {
-    console.error(res)
+  errorHander(err) {
+    wx.hideLoading({
+      complete: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: err.errMsg,
+        })
+      },
+    });
   }
 
   /**
@@ -55,6 +62,10 @@ class api {
   getCinemas(data) {
     return this._request.getRequest(this._baseUrl + url.cinemaList, data,
       this._defaultHeader, 'GET').then(res => res.data);
+  };
+
+  getCityList(data){
+    return this._request.getRequest(this._baseUrl + url.cityList,data,this._defaultHeader,'GET').then(res=>res.data)
   }
 }
 export default api

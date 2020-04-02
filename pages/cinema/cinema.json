@@ -2,5 +2,7 @@
   "usingComponents" : {
     "header" : "../component/header/header"
   },
-  "navigationBarTitleText": "影院"
+  "navigationBarTitleText": "影院",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
 }

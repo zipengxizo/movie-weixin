@@ -1,4 +1,10 @@
 Component({
+  properties: {
+    cityName: {
+      type: String,
+      value: '',
+    }
+  },
   data: {
     selected: 1,
     color: "#7A7E83",
@@ -32,8 +38,11 @@ Component({
       const data = e.currentTarget.dataset
       const url = data.path;
       const index = data.index;
-      // wx.switchTab({url});
-      // wx.switchTab({url});
+      if (index === 0) {
+        wx.navigateTo({
+          url: '/pages/city/city',
+        })
+      }
       if (index === 1 || index === 2) {
         this.triggerEvent('changeTabar',{index:index});
       }

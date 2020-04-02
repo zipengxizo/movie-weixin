@@ -1,21 +1,24 @@
-import api from "../../utils/http.js";
-import { url } from '../../utils/base.js'
+
 const app = getApp();
 Page({
   data: {
     movieList: [],
-    cityId  :10
+    cityId: wx.getStorageSync('cityId') || 1,
+    cityName: wx.getStorageSync('cityName') || '北京',
+    index: 1
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading();
-    // this.fetchOnMovie(url.movieOn, { cityId: this.data.cityId });
-    this.fetchOnMovie({cityId : this.data.cityId});
-
+    let params = { cityId: this.data.cityId };
+    this.data.index === 1 ? this.fetchOnMovie(params) :
+      this.fetchComingMovie(params);
   },
   onLoad: function () {
-    wx.showLoading({
-      title: '加载中...',
-    });
+    let storegeCityId = wx.getStorageSync('cityId');
+    let storeCityName = wx.getStorageSync('cityName');
+    if (storegeCityId && storegeCityId !== this.data.cityId) {
+      this.setData({cityId : storegeCityId});
+      this.setData({cityName : storeCityName});
+    }
     let params = { cityId: this.data.cityId };
     this.fetchOnMovie(params);
   },
@@ -29,11 +32,9 @@ Page({
   },
   changeTabar(e) {
     let params = { cityId: this.data.cityId };
-    if (e.detail.index === 1) {
-      this.fetchOnMovie(params);
-    } else if (e.detail.index === 2) {
-      this.fetchComingMovie(params);
-    }
+    let index = e.detail.index;
+    this.setData({ index: index });
+    this.data.index === 1 ? this.fetchOnMovie(params) : this.fetchComingMovie(params);
   },
   detail(e) {
     let movieid = e.currentTarget.dataset.movieid;
@@ -46,11 +47,7 @@ Page({
   },
 
   fetchComingMovie(params) {
-    wx.showLoading({
-      title: '加载中...',
-    });
     app.api2.getMoiveComing(params).then((res) => {
-      wx.hideLoading();
       let movieList = res.data.comingList;
       console.log(res)
       console.log(movieList)
@@ -65,13 +62,7 @@ Page({
 
   },
   fetchOnMovie(params) {
-    wx.showLoading({
-      title: '加载中...',
-    });
     app.api2.getMovieOn(params).then((res) => {
-      wx.hideLoading();
-      wx.hideNavigationBarLoading();
-      wx.stopPullDownRefresh();
       let movieList = res.data.movieList;
       let changeMovieList = movieList.map((item) => {
         item.img = item.img.replace(/w\.h/, '128.180');

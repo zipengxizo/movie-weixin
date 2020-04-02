@@ -15,11 +15,7 @@ Page({
     this.fetchOnMovieDetail({ movieId: movieId });
   },
   fetchOnMovieDetail(params) {
-    wx.showLoading({
-      title: '加载中...',
-    });
     app.api2.getMovieDetai(params).then((res) => {
-      wx.hideLoading();
       let detailMovie = res.data.detailMovie;
       for (const key in detailMovie) {
         if (detailMovie.hasOwnProperty(key)) {
