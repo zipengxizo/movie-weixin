@@ -1,44 +1,42 @@
 
-import api from "../../utils/http.js"
+
+const app = getApp();
 Page({
   data: {
-    detailMovie : {}
+    detailMovie: {},
   },
   onLoad: function (options) {
-    console.log(options)
     let movieId = options.movieId;
-    let that = this;
     // const eventChannel = this.getOpenerEventChannel()
     // eventChannel.on('acceptMovieId', function(data) {
     //   movieId = data.data.movieId;
     // })
-    
-    let url = "detailmovie?movieId="+movieId;
-    that.fetchOnMovieDetail(url);
+
+    this.fetchOnMovieDetail({ movieId: movieId });
   },
-  fetchOnMovieDetail(url){
+  fetchOnMovieDetail(params) {
     wx.showLoading({
-      title: '加载中',
+      title: '加载中...',
     });
-    let that = this;
-    api.get(url).then((res)=>{
+    app.api2.getMovieDetai(params).then((res) => {
       wx.hideLoading();
-      let detailMovie = res.data.data.detailMovie;
+      let detailMovie = res.data.detailMovie;
       for (const key in detailMovie) {
         if (detailMovie.hasOwnProperty(key)) {
           if (key === "img") {
-            detailMovie[key] = detailMovie[key].replace(/w\.h/,'128.180');
+            detailMovie[key] = detailMovie[key].replace(/w\.h/, '128.180');
           }
           if (key === "photos") {
-            let mapPhotos = detailMovie[key].map((item)=>{
-              return item.replace(/w\.h/,'128.180')
+            let mapPhotos = detailMovie[key].map((item) => {
+              return item.replace(/w\.h/, '128.180')
             });
             detailMovie[key] = mapPhotos;
           }
         }
       }
-      that.setData({detailMovie : detailMovie});
-    }).catch((err)=>{
+      this.setData({ detailMovie: detailMovie });
+    }).catch((err) => {
+      console.log(err);
     })
   }
 })

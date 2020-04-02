@@ -1,17 +1,16 @@
-import api from "../../utils/http";
-
+const app = getApp();
 Page({
   data: {
-    cinemaList : []
+    cinemaList : [],
+    cityId : 10
   },
   onLoad: function (options) {
-    let that = this;
     wx.showLoading({
-      title: '加载中',
+      title: '加载中...',
     });
-    api.get("cinemaList?cityId=10").then((res)=>{
+    app.api2.getCinemas({cityId : this.data.cityId}).then((res)=>{
       wx.hideLoading();
-      let cinemaList = res.data.data.cinemas;
+      let cinemaList = res.data.cinemas;
       let changeCinemaList = cinemaList.map((item)=>{
         let tags = item.tag;
         let changeTags = [];
@@ -29,7 +28,7 @@ Page({
         item.showTag = changeTags;
         return item;
       });
-      that.setData({
+      this.setData({
         cinemaList : changeCinemaList
       });
     }).catch((err)=>{
@@ -37,7 +36,6 @@ Page({
     });
   },
   onShow : function(){
-    console.log(this.getTabBar);
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
