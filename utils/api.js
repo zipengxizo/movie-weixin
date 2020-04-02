@@ -3,7 +3,7 @@
  * description: 所有的接口
  */
 import request from './request.js';
-import { baseUrl, url } from './base.js';
+import { baseUrl, baseUrl2, url } from './base.js';
 
 class api {
   constructor() {
@@ -64,8 +64,12 @@ class api {
       this._defaultHeader, 'GET').then(res => res.data);
   };
 
-  getCityList(data){
-    return this._request.getRequest(this._baseUrl + url.cityList,data,this._defaultHeader,'GET').then(res=>res.data)
+  getCityList(data) {
+    return this._request.getRequest(this._baseUrl + url.cityList, data, this._defaultHeader, 'GET').then(res => res.data)
+  };
+
+  loginWinxin(data) {
+    return this._request.getRequest(baseUrl2 + url.login, data, this._defaultHeader, 'GET').then(res => res.data);
   }
 }
 export default api

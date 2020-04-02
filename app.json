@@ -33,7 +33,7 @@
       },
       {
         "current": 0,
-        "pagePath": "pages/center/center",
+        "pagePath": "pages/index/index",
         "iconPath": "/imgs/category.png",
         "selectedIconPath": "/imgs/category_on.png",
         "text": "我的"
