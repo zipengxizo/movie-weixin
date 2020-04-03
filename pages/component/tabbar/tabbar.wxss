@@ -8,4 +8,4 @@
 .movie_menu .hot_item.active{ color: #ef4238; border-bottom: 4rpx #ef4238 solid;}
 .movie_menu .search_entry{ margin-right:40rpx; height:100%; line-height: 90rpx;}
 .movie_menu .search_entry.active{ color: #ef4238; border-bottom: 4rpx #ef4238 solid;}
-.movie_menu .search_entry .icon-search{  font-size:48rpx; color:red;}
+.movie_menu .search_entry .icon-search{  font-size:42rpx; color:red;}

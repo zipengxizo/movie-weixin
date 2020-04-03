@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/center/center",
     "pages/movie/movie",
     "pages/cinema/cinema",
-    "pages/center/center",
-    "pages/index/index",
+    "pages/login/login",
     "pages/logs/logs",
     "pages/comingmoive/comingmoive",
     "pages/detail/detail",
@@ -33,7 +33,7 @@
       },
       {
         "current": 0,
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/center/center",
         "iconPath": "/imgs/category.png",
         "selectedIconPath": "/imgs/category_on.png",
         "text": "我的"

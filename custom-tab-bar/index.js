@@ -26,7 +26,7 @@ Component({
       },
       {
         "current": 0,
-        "pagePath": "/pages/index/index",
+        "pagePath": "/pages/center/center",
         "iconPath": "/imgs/category.png",
         "selectedIconPath": "/imgs/category_on.png",
         "text": "我的"

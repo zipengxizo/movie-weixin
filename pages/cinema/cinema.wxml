@@ -4,13 +4,13 @@
     <view id="content">
     <view class="cinema_menu">
         <view class="city_switch">
-            <text class="text">全城</text> <i class="iconfont icon-lower-triangle"></i>
+            <text class="text">全城</text> <i class="iconfont icon-xiasanjiao"></i>
         </view>
         <view class="brand_swtich">
-           <text class="text">品牌</text> <i class="iconfont icon-lower-triangle"></i>
+           <text class="text">品牌</text> <i class="iconfont icon-xiasanjiao"></i>
         </view>
         <view class="feature_switch">
-            <text class="text">特色</text> <i class="iconfont icon-lower-triangle"></i>
+            <text class="text">特色</text> <i class="iconfont icon-xiasanjiao"></i>
         </view>
     </view>
     <view class="cinema_body">

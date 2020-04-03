@@ -1,29 +1,18 @@
-//index.js
-//获取应用实例
+
 const app = getApp()
 Page({
   data: {
-    motto: '电影',
     userInfo: {},
     hasUserInfo: false,
-    openid : wx.getStorageSync('openid'),
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    canIUse: wx.canIUse('button.open-type.getUserInfo') 
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
+   /*  if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
     } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
@@ -41,30 +30,31 @@ Page({
           })
         }
       })
-    }
+    } */
   },
-  getUserInfo: function (e) {
+/*   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  },
+  }, */
   login(e){
     wx.login({
       complete: (res) => {
         let code = res.code;
         app.api2.loginWinxin({code : code}).then((res)=>{
-          console.log(res);
           if (res.status === 0) {
             let token = res.data.token;
             let openid = res.data.openid;
             wx.setStorageSync('token', token);
-            wx.setStorageSync('openid', openid)
-            this.setData({openid : openid});
+            wx.setStorageSync('openid', openid);
             wx.showToast({
               title: '登录成功',
             });
+            wx.switchTab({
+              url: '/pages/center/center',
+            })
           }
           else{
             wx.showToast({
@@ -72,7 +62,6 @@ Page({
             })
           }
         });
-
       },
     })
   }

@@ -2,10 +2,7 @@
 import api from './utils/api.js';
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -28,7 +25,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null,
+    userInfo : null,
+    hasLogin: wx.getStorageSync('token') ? true : false,
     host: "http://39.97.33.178/api/",
   },
   api2: new api()
