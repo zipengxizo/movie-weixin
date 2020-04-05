@@ -1,0 +1,27 @@
+  <view class="search_body">
+  	<view class="search_input">
+  		<view class="search_input_wrapper">
+  			<i class="iconfont icon-sousuo i"></i>
+  			<input class="input" type="text" model:value="" bindinput="rearch"></input>
+  		</view>
+  	</view>
+  	<view class="search_result">
+  		<view class="h3">电影/电视剧/综艺</view>
+  		<view class="ul">
+  			<view class="li" wx:for="{{movielist}}" wx:key="id">
+                <view class="img">
+                    <image class="img" src="{{item.img}}"></image>
+                </view>
+  				<view class="info">
+  					<view class="p">
+  						<text class="span">{{ item.nm }}</text>
+  						<text class="span">{{ item.sc }}</text>
+  					</view>
+  					<view class="p">{{ item.enm }}</view>
+  					<view class="p">{{ item.cat }}</view>
+  					<view class="p">{{ item.rt }}</view>
+  				</view>
+  			</view>
+  		</view>
+  	</view>
+  </view>

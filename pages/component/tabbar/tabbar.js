@@ -43,6 +43,11 @@ Component({
           url: '/pages/city/city',
         })
       }
+      else if(index === 3){
+        wx.navigateTo({
+          url: '/pages/research/resarch',
+        })
+      }
       if (index === 1 || index === 2) {
         this.triggerEvent('changeTabar',{index:index});
       }

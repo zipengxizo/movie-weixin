@@ -67,9 +67,21 @@ class api {
   getCityList(data) {
     return this._request.getRequest(this._baseUrl + url.cityList, data, this._defaultHeader, 'GET').then(res => res.data)
   };
+  /**
+   * 根据code查询微信登录
+   * @param {code} data 
+   */
 
   loginWinxin(data) {
     return this._request.getRequest(baseUrl2 + url.login, data, this._defaultHeader, 'GET').then(res => res.data);
+  }
+  /**
+   * 根据keyword查询电影
+   * @param {kw,cityId} data 
+   */
+
+  getRearchMovieList(data){
+    return this._request.getRequest(this._baseUrl + url.rearchMovieList,data,this._defaultHeader,'GET').then(res => res.data);
   }
 }
 export default api
