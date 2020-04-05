@@ -8,7 +8,7 @@
   	<view class="search_result">
   		<view class="h3">电影/电视剧/综艺</view>
   		<view class="ul">
-  			<view class="li" wx:for="{{movielist}}" wx:key="id">
+  			<view class="li" wx:for="{{movielist}}" wx:key="id" bindtap="detail" data-movieid="{{item.id}}">
                 <view class="img">
                     <image class="img" src="{{item.img}}"></image>
                 </view>

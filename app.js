@@ -42,7 +42,6 @@ App({
   globalData: {
     userInfo : null,
     hasLogin: wx.getStorageSync('token') ? true : false,
-    host: "http://39.97.33.178/api/",
   },
   api2: new api()
 })

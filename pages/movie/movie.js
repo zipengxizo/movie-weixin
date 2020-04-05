@@ -16,8 +16,8 @@ Page({
     let storegeCityId = wx.getStorageSync('cityId');
     let storeCityName = wx.getStorageSync('cityName');
     if (storegeCityId && storegeCityId !== this.data.cityId) {
-      this.setData({cityId : storegeCityId});
-      this.setData({cityName : storeCityName});
+      this.setData({ cityId: storegeCityId });
+      this.setData({ cityName: storeCityName });
     }
     let params = { cityId: this.data.cityId };
     this.fetchOnMovie(params);
@@ -44,6 +44,16 @@ Page({
         res.eventChannel.emit('acceptMovieId', { data: { movieId: movieid } })
       }
     })
+  },
+  sell(e) {
+    if (!wx.getStorageSync('token')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      let movieid = e.currentTarget.dataset.movieid;
+      console.log(movieid);
+    }
   },
 
   fetchComingMovie(params) {

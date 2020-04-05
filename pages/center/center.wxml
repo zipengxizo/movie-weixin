@@ -12,15 +12,16 @@
 			</navigator>
 		</block>
 		<block wx:else>
-			<view bindtap="logout">
-				<view class="openid">{{openid}}</view>
+			<view>
+				<view class="openid" bindtap="logout">
+				<text>{{openid}}</text>
+				<icon class="iconfont icon-youjiantou logout"></icon></view>
 				<block wx:if="{{!hasUserInfo && canIUse}}">
 					<button class="user-btn" type="default" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取微信头像昵称</button>
 				</block>
 				<block wx:else>
 					<text class="userinfo-nickname">{{userInfo.nickName}},欢迎您</text>
 				</block>
-				<icon class="iconfont icon-youjiantou logout"></icon>
 			</view>
 		</block>
 	</view>

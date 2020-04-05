@@ -8,14 +8,16 @@ Page({
         kw:''
 
     },
-    onLoad: function (options) {
-
-    },
-    onReady: function () {
+    detail(e){
+        let movieid = e.currentTarget.dataset.movieid;
+        wx.navigateTo({
+          url: '/pages/detail/detail?movieId='+movieid,
+        })
 
     },
     rearch(e){
         let {value} = e.detail;
+        if(value.length === 0) return; 
         clearInterval(timeoutId);
         let param = {
             kw : value,
@@ -32,6 +34,6 @@ Page({
                 }
             });
             
-        }, 100);
+        }, 1000);
     }
 })
