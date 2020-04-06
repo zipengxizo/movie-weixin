@@ -46,13 +46,20 @@ Page({
     })
   },
   sell(e) {
+    let movieid = e.currentTarget.dataset.movieid;
     if (!wx.getStorageSync('token')) {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
+      app.wx.navigateTo({
+        url : '/pages/login/login'
+      }).then((res)=>{
+        res.eventChannel.emit('fullUrl', { data: `/pages/detail/detail?movieId=${movieid}` });
+
+      });
+      /* wx.navigateTo({
+        url: `/pages/login/login?fullUrl=pages/detail/detail@@movieId=${movieid}`,
+      }) */
     } else {
-      let movieid = e.currentTarget.dataset.movieid;
       console.log(movieid);
+      //预售页面
     }
   },
 

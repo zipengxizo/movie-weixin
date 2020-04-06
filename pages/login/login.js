@@ -2,8 +2,14 @@
 const app = getApp()
 Page({
   data: {
+    fullUrl : '',
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.on('fullUrl', (res)=>{
+      this.setData({fullUrl : res.data});
+
+    });
   },
   login(e){
     wx.login({
@@ -19,8 +25,8 @@ Page({
               title: '登录成功',
             });
             setTimeout(() => {
-              wx.switchTab({
-                url: '/pages/center/center',
+              wx.redirectTo({
+                url: this.data.fullUrl,
               })
             }, 1000);
           }

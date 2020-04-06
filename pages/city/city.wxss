@@ -8,9 +8,9 @@
 }
 .city_body .city_hot{ margin-top: 20px;}
 .city_body .city_hot .h2{ padding-left: 15px; line-height: 30px; font-size: 14px; background:#F0F0F0; font-weight: normal;}
-.city_body .city_hot .ul{}
+.city_body .city_hot .ul{padding-bottom: 6px;}
 .city_body .city_hot .ul .li{ float: left; background: #fff; width: 29%; height: 33px; margin-top: 15px; margin-left: 3%; padding: 0 4px; border: 1px solid #e6e6e6; border-radius: 3px; line-height: 33px; text-align: center; box-sizing: border-box;}
-.city_body .city_sort{}
+
 .city_body .city_sort div{ margin-top: 20px;}
 .city_body .city_sort .h2{ padding-left: 15px; line-height: 30px; font-size: 14px; background:#F0F0F0; font-weight: normal;}
 .city_body .city_sort .ul{ padding-left: 10px; margin-top: 10px;}

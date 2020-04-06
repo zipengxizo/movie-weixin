@@ -1,7 +1,7 @@
 
 import api from './utils/api.js';
 
-import {promisifyAll,promisify } from 'miniprogram-api-promise';
+import {promisifyAll } from 'miniprogram-api-promise';
 const wxp = {}
 promisifyAll(wx, wxp);
 App({
@@ -43,5 +43,6 @@ App({
     userInfo : null,
     hasLogin: wx.getStorageSync('token') ? true : false,
   },
-  api2: new api()
+  api2: new api(),
+  wx:wxp
 })

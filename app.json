@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/city/city",
     "pages/movie/movie",
     "pages/cinema/cinema",
     "pages/login/login",
@@ -7,8 +8,7 @@
     "pages/logs/logs",
     "pages/comingmoive/comingmoive",
     "pages/detail/detail",
-    "pages/research/resarch",
-    "pages/city/city"
+    "pages/research/resarch"
   ],
   "tabBar": {
     "custom": true,

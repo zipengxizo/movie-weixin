@@ -2,7 +2,10 @@ const app = getApp();
 Page({
     data: {
         cityList : [],
-        hotList : []
+        hotList : [],
+        topArr : [],
+        flag : false,
+        scrollTop: 0
 
     },
     onLoad: function (options) {
@@ -81,12 +84,46 @@ Page({
             hotList
         };
     },
+    scroll(event){
+       let {scrollTop} = event.detail;
+       if (!this.data.flag) {
+           this.setData({flag :true})
+           this.getAllRects();
+       }
 
-    handleToIndex(index) {
-        var h2 = this.$refs.city_sort.getElementsByTagName('h2');
-        this.$refs.city_sort.parentNode.style.transform = 'translateY(' + -h2[index].offsetTop + 'px)';
-        // this.$refs.city_sort.parentNode.scrollTop = -h2[index].offsetTop;
-        // this.$refs.city_List.scrollToTop(-h2[index].offsetTop);
+    },
+    scrollIndex(e){
+        let selectIndex = e.currentTarget.dataset.index;
+        if (this.data.flag) {
+            console.log(this.data.topArr[selectIndex])
+            this.setData({scrollTop:this.data.topArr[selectIndex]});
+        }else{
+            this.getAllRects().then((arr)=>{
+                this.setData({scrollTop:arr[selectIndex]});
+            });
+        }
+          
+    },
+    getAllRects(){
+        let that = this;
+          return new Promise((resolve, reject) => {
+            wx.createSelectorQuery().selectAll('.city_sort .h2').boundingClientRect(function(rects){
+                if (rects.length >0 ) {
+                    let arr = [];
+                    rects.forEach(rect => {
+                        arr.push(rect.top - 194);
+                    });
+                    that.setData({
+                        flag:true,
+                        topArr:arr
+                    });
+                    resolve(arr);
+                    
+                }else{
+                    reject('error');
+                }
+              }).exec();
+         })
 
     }
 
