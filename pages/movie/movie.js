@@ -54,9 +54,6 @@ Page({
         res.eventChannel.emit('fullUrl', { data: `/pages/detail/detail?movieId=${movieid}` });
 
       });
-      /* wx.navigateTo({
-        url: `/pages/login/login?fullUrl=pages/detail/detail@@movieId=${movieid}`,
-      }) */
     } else {
       console.log(movieid);
       //预售页面
@@ -66,8 +63,6 @@ Page({
   fetchComingMovie(params) {
     app.api2.getMoiveComing(params).then((res) => {
       let movieList = res.data.comingList;
-      console.log(res)
-      console.log(movieList)
       let changeMovieList = movieList.map((item) => {
         item.img = item.img.replace(/w\.h/, '128.180');
         return item;

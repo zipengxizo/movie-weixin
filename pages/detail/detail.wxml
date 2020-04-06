@@ -22,7 +22,7 @@
 				{{ detailMovie.dra }}
 			</view>
 		</view>
-		<scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
+		<scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
 			<block wx:for="{{detailMovie.photos}}" wx:key="*this">
 				<image class="img" src="{{item}}" />
 			</block>

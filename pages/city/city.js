@@ -4,35 +4,30 @@ Page({
         cityList : [],
         hotList : [],
         topArr : [],
-        flag : false,
         scrollTop: 0
 
     },
     onLoad: function (options) {
+
         app.api2.getCityList().then((res)=>{
             var cities = res.data.cities;
             //[ { index : 'A' , list : [{ nm : '阿城' , id : 123 }] } ]
             var { cityList , hotList } = this.formatCityList(cities);
             this.setData({cityList :cityList});
             this.setData({hotList : hotList});
+            wx.nextTick((()=>{
+                this.getAllRects();
+            }))
         });
-
     },
     handleToCity(e){
         let cityName = e.currentTarget.dataset.name;
         let cityId = e.currentTarget.dataset.id;
         wx.setStorageSync('cityId', cityId);
         wx.setStorageSync('cityName', cityName);
-        // wx.navigateTo({
-        //   url: '/pages/movie/movie',
-        // });
-        /* wx.switchTab({
-          url: '/pages/movie/movie',
-        }); */
         wx.reLaunch({
           url: '/pages/movie/movie',
         })
-
     },
     formatCityList(cities) {
         var cityList = [];
@@ -84,24 +79,9 @@ Page({
             hotList
         };
     },
-    scroll(event){
-       let {scrollTop} = event.detail;
-       if (!this.data.flag) {
-           this.setData({flag :true})
-           this.getAllRects();
-       }
-
-    },
     scrollIndex(e){
         let selectIndex = e.currentTarget.dataset.index;
-        if (this.data.flag) {
-            console.log(this.data.topArr[selectIndex])
-            this.setData({scrollTop:this.data.topArr[selectIndex]});
-        }else{
-            this.getAllRects().then((arr)=>{
-                this.setData({scrollTop:arr[selectIndex]});
-            });
-        }
+        this.setData({scrollTop:this.data.topArr[selectIndex]});
           
     },
     getAllRects(){
@@ -114,7 +94,6 @@ Page({
                         arr.push(rect.top - 194);
                     });
                     that.setData({
-                        flag:true,
                         topArr:arr
                     });
                     resolve(arr);
@@ -124,7 +103,5 @@ Page({
                 }
               }).exec();
          })
-
     }
-
 })

@@ -53,6 +53,7 @@ Page({
     })
   },
   logout(){
+    let self = this;
     wx.showModal({
       title: '提示',
       content: '确定退出',
@@ -60,9 +61,11 @@ Page({
         if (res.confirm) {
           wx.removeStorageSync('token');
           wx.removeStorageSync('openid');
-          wx.reLaunch({
+          app.globalData.userInfo = null;
+          self.setData({userInfo : {}});
+          wx.navigateTo({
             url: '/pages/login/login'
-          })
+          });
         } else if (res.cancel) {
         }
       }
@@ -72,7 +75,9 @@ Page({
     if (!wx.getStorageSync('token')) {
       wx.navigateTo({
         url: '/pages/login/login',
-      })
+      }).then((res)=>{
+        res.eventChannel.emit('fullUrl', { data: '/pages/center/center'});
+      });
     }
     else{
       console.log('next to');

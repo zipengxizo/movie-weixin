@@ -4,7 +4,7 @@
 			<image class="image" src="{{userInfo.avatarUrl}}" mode="cover"></image>
 		</view>
 		<block wx:if="{{!isshow}}">
-			<navigator url="/pages/login/login">
+			<navigator url="/pages/login/login" hover-class="none">
 				<view class="txt">
 					<text>立即登录</text>
 					<icon class="iconfont icon-youjiantou nav"></icon>

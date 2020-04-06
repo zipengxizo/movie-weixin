@@ -1,5 +1,3 @@
-
-
 const app = getApp();
 Page({
   data: {
@@ -7,14 +5,10 @@ Page({
   },
   onLoad: function (options) {
     let movieId = options.movieId;
-    // const eventChannel = this.getOpenerEventChannel()
-    // eventChannel.on('acceptMovieId', function(data) {
-    //   movieId = data.data.movieId;
-    // })
-
     this.fetchOnMovieDetail({ movieId: movieId });
   },
   fetchOnMovieDetail(params) {
+    if(!params.movieId) return false;
     app.api2.getMovieDetai(params).then((res) => {
       let detailMovie = res.data.detailMovie;
       for (const key in detailMovie) {

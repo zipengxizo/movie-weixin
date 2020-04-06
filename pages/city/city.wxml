@@ -6,7 +6,7 @@
 				<view class="li" wx:for="{{hotList}}" data-id="{{item.id}}" data-name="{{item.nm}}" bindtap="handleToCity" wx:key="id">{{item.nm}}</view>
 			</view>
 		</view>
-		<scroll-view class="city_sort" bindscroll="scroll" scroll-y="true" scroll-with-animation="true" style="height: 100%" scroll-top="{{scrollTop}}">
+		<scroll-view class="city_sort" scroll-y="true" scroll-with-animation="true" style="height: 100%" scroll-top="{{scrollTop}}">
 			<block wx:for="{{cityList}}" wx:key="index">
 				<view class="h2" id="h2-{{item.index}}">{{item.index}}</view>
 				<view class="ul">
