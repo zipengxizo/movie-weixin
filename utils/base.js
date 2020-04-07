@@ -9,7 +9,8 @@ const url = {
     cinemaList: "cinemaList",
     cityList: "cityList",
     login: "users/loginWeixin",
-    rearchMovieList : 'searchList'
+    rearchMovieList : 'searchList',
+    locations :"getLocation"
     
 }
 module.exports = {

@@ -1,18 +1,6 @@
 <view id="main">
-	<!-- <header title="电影"></header> -->
 	<view id="content">
-		<!-- <view class="movie_menu">
-				<view class="city_name">
-					<text class="location_name">大连</text><i class="iconfont icon-lower-triangle"></i>
-				</view>
-				<view class="hot_swtich">
-					<view class="hot_item">正在热映</view>
-					<view class="hot_item active">即将上映</view>
-				</view>
-				<view class="search_entry">
-					<i class="iconfont icon-sousuo"></i>
-				</view>
-			</view> -->
+        <loading type="dot-gray" show="{{show}}"></loading>
 		<tabbar bind:changeTabar="changeTabar" cityName="{{cityName}}"></tabbar>
 		<view class="movie_body">
 			<view class="movie_ul">

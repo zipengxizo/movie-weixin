@@ -63,7 +63,10 @@ class api {
     return this._request.getRequest(this._baseUrl + url.cinemaList, data,
       this._defaultHeader, 'GET').then(res => res.data);
   };
-
+  /**
+   * 获取城市
+   * @param {*} data 
+   */
   getCityList(data) {
     return this._request.getRequest(this._baseUrl + url.cityList, data, this._defaultHeader, 'GET').then(res => res.data)
   };
@@ -82,6 +85,13 @@ class api {
 
   getRearchMovieList(data){
     return this._request.getRequest(this._baseUrl + url.rearchMovieList,data,this._defaultHeader,'GET').then(res => res.data);
+  };
+  /**
+   * 获取定位
+   * @param {*} data 
+   */
+  getLocation(data){
+    return this._request.getRequest(this._baseUrl + url.locations,data,this._defaultHeader,'GET').then(res=> res.data);
   }
 }
 export default api

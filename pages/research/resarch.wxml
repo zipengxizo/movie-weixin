@@ -2,7 +2,8 @@
   	<view class="search_input">
   		<view class="search_input_wrapper">
   			<i class="iconfont icon-sousuo i"></i>
-  			<input class="input" type="text" model:value="" bindinput="rearch"></input>
+  			<input class="input" type="text" value="{{value}}" placeholder="请输入搜索关键字" confirm-type="search" bindinput="rearch" bindfocus="focus" bindblur="blur"></input>
+			<icon wx:if="{{isShow}}" bindtap="clear" type="clear" size="14" class="clear"></icon>
   		</view>
   	</view>
   	<view class="search_result">

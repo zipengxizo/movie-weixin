@@ -20,6 +20,7 @@ Page({
 
   },
   fetchCinema(params){
+    wx.showLoading({mask:true});
     app.api2.getCinemas(params).then((res)=>{
       let cinemaList = res.data.cinemas;
       let changeCinemaList = cinemaList.map((item)=>{
@@ -42,6 +43,7 @@ Page({
       this.setData({
         cinemaList : changeCinemaList
       });
+      wx.hideLoading();
     }).catch((err)=>{
       console.log(err);
     });

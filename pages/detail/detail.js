@@ -9,6 +9,7 @@ Page({
   },
   fetchOnMovieDetail(params) {
     if(!params.movieId) return false;
+    wx.showLoading({mask:true});
     app.api2.getMovieDetai(params).then((res) => {
       let detailMovie = res.data.detailMovie;
       for (const key in detailMovie) {
@@ -25,6 +26,7 @@ Page({
         }
       }
       this.setData({ detailMovie: detailMovie });
+      wx.hideLoading();
     }).catch((err) => {
       console.log(err);
     })

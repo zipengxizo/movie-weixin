@@ -5,9 +5,9 @@
     "pages/login/login",
     "pages/detail/detail",
     "pages/center/center",
+    "pages/research/resarch",
     "pages/city/city",
-    "pages/comingmoive/comingmoive",
-    "pages/research/resarch"
+    "pages/comingmoive/comingmoive"
   ],
   "tabBar": {
     "custom": true,

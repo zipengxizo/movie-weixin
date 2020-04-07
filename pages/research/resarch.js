@@ -4,8 +4,8 @@ let timeoutId;
 Page({
     data: {
         movielist : [],
-        cityId:wx.getStorageSync('cityId') || 10,
-        kw:''
+        value : '',
+        isShow: false
 
     },
     detail(e){
@@ -15,22 +15,47 @@ Page({
         })
 
     },
+    clear(e){
+        console.log(e)
+        this.setData({value : '',});
+    },
+    focus(e){
+        let {value} = e.detail;
+        if (value.length > 0) {
+            this.setData({
+                isShow : true
+            })
+        }
+    },
+    blur(){
+        this.setData({isShow : false});
+    },
     rearch(e){
         let {value} = e.detail;
-        if(value.length === 0) return; 
+        if(value.length === 0){
+            this.setData({isShow : false});
+            return;
+        }
+        this.setData({
+            isShow : true,
+            value :value
+        }) 
         clearInterval(timeoutId);
         let param = {
             kw : value,
-            cityId : this.data.cityId
+            cityId : wx.getStorageSync('cityId') || 10
         }
         timeoutId = setTimeout(() => {
+            wx.showLoading({mask:true});
             app.api2.getRearchMovieList(param).then((res)=>{
                 if(res.status === 0){
+                    if(!res.data.movies) return false;
                     let changeMovie = res.data.movies.list.map((item)=>{
                         item.img = item.img.replace(/w\.h/,'128.180');
                         return item;
                     })
                     this.setData({movielist : changeMovie});
+                    wx.hideLoading();
                 }
             });
             

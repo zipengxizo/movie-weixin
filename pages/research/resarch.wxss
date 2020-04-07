@@ -11,3 +11,4 @@
 .search_body .search_result .info .p{ height: 22px; display: flex; line-height: 22px; font-size: 12px;overflow: hidden;}
 .search_body .search_result .info .p:nth-of-type(1) .span:nth-of-type(1){ font-size: 18px; flex:1; }
 .search_body .search_result .info .p:nth-of-type(1) .span:nth-of-type(2){ font-size: 16px; color:#fc7103;}
+.search_input_wrapper .clear{padding-top: 6px;padding-left: 10px;padding-right: 2px;}

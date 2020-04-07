@@ -1,7 +1,7 @@
 {
   "usingComponents" :{
-    "header" : "../component/header/header",
-    "tabbar" : "../component/tabbar/tabbar"
+    "tabbar" : "../component/tabbar/tabbar",
+    "loading" : "../component/loading/loading"
   },
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 50

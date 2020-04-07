@@ -8,13 +8,14 @@ Page({
 
     },
     onLoad: function (options) {
-
+        wx.showLoading({mask:true});
         app.api2.getCityList().then((res)=>{
             var cities = res.data.cities;
             //[ { index : 'A' , list : [{ nm : '阿城' , id : 123 }] } ]
             var { cityList , hotList } = this.formatCityList(cities);
             this.setData({cityList :cityList});
             this.setData({hotList : hotList});
+            wx.hideLoading();
             wx.nextTick((()=>{
                 this.getAllRects();
             }))

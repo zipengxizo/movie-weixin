@@ -1,16 +1,43 @@
-
 const app = getApp();
 Page({
   data: {
     movieList: [],
     cityId: wx.getStorageSync('cityId') || 1,
     cityName: wx.getStorageSync('cityName') || '北京',
-    index: 1
+    index: 1,
+    show: false
   },
   onPullDownRefresh: function () {
     let params = { cityId: this.data.cityId };
-    this.data.index === 1 ? this.fetchOnMovie(params) :
-      this.fetchComingMovie(params);
+    this.setData({show : true});
+    if (this.data.index === 1) {
+      app.api2.getMovieOn(params).then((res)=>{
+        let movieList = res.data.movieList;
+        let changeMovieList = movieList.map((item) => {
+          item.id = item.id + Math.random()*100;
+          item.img = item.img.replace(/w\.h/, '128.180');
+          return item;
+        });
+        movieList = 
+        this.setData({ 
+          movieList: [...this.data.movieList,...changeMovieList],
+          show : false
+        });
+      });
+    }else if(this.data.index === 2){
+      app.api2.getMoiveComing(params).then((res)=>{
+        let movieList = res.data.comingList;
+        let changeMovieList = movieList.map((item) => {
+          item.img = item.img.replace(/w\.h/, '128.180');
+          return item;
+        });
+        this.setData({ 
+          movieList:  [...this.data.movieList,...changeMovieList],
+          show:false 
+        });
+      })
+    }
+    wx.stopPullDownRefresh();
   },
   onLoad: function () {
     let storegeCityId = wx.getStorageSync('cityId');
@@ -18,7 +45,7 @@ Page({
     if (storegeCityId && storegeCityId !== this.data.cityId) {
       this.setData({ cityId: storegeCityId });
       this.setData({ cityName: storeCityName });
-    }
+    };
     let params = { cityId: this.data.cityId };
     this.fetchOnMovie(params);
   },
@@ -49,8 +76,8 @@ Page({
     let movieid = e.currentTarget.dataset.movieid;
     if (!wx.getStorageSync('token')) {
       app.wx.navigateTo({
-        url : '/pages/login/login'
-      }).then((res)=>{
+        url: '/pages/login/login'
+      }).then((res) => {
         res.eventChannel.emit('fullUrl', { data: `/pages/detail/detail?movieId=${movieid}` });
 
       });
@@ -59,8 +86,8 @@ Page({
       //预售页面
     }
   },
-
   fetchComingMovie(params) {
+    wx.showLoading({mask:true});
     app.api2.getMoiveComing(params).then((res) => {
       let movieList = res.data.comingList;
       let changeMovieList = movieList.map((item) => {
@@ -68,12 +95,14 @@ Page({
         return item;
       });
       this.setData({ movieList: changeMovieList });
+      wx.hideLoading();
     }).catch((err) => {
       console.log(err);
     });
 
   },
   fetchOnMovie(params) {
+    wx.showLoading({mask:true});
     app.api2.getMovieOn(params).then((res) => {
       let movieList = res.data.movieList;
       let changeMovieList = movieList.map((item) => {
@@ -81,6 +110,7 @@ Page({
         return item;
       });
       this.setData({ movieList: changeMovieList });
+      wx.hideLoading();
     }).catch((err) => {
       console.log(err);
     });

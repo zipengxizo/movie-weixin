@@ -47,11 +47,6 @@ class request {
    */
   requestAll(url, data, header, method) {
     return new Promise((resolve, reject) => {
-
-      wx.showLoading({
-        title: '加载中...',
-      });
-      wx.showNavigationBarLoading();
       wx.request({
         url: url,
         data: data,
@@ -59,9 +54,6 @@ class request {
         method: method,
         timeout: 1000 * 10,
         success: (res => {
-          wx.hideLoading();
-          wx.hideNavigationBarLoading();
-          wx.stopPullDownRefresh();
           if (res.statusCode === 200) {
             //200: 服务端业务处理正常结束
             resolve(res)
