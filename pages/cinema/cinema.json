@@ -1,6 +1,7 @@
 {
   "usingComponents" : {
-    "header" : "../component/header/header"
+    "loading" : "../component/loading/loading",
+    "mp-sticky":"../component/sticky/index"
   },
   "navigationBarTitleText": "影院",
   "enablePullDownRefresh": true,

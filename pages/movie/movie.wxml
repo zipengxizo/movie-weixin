@@ -1,7 +1,9 @@
 <view id="main">
 	<view id="content">
         <loading type="dot-gray" show="{{show}}"></loading>
-		<tabbar bind:changeTabar="changeTabar" cityName="{{cityName}}"></tabbar>
+		<mp-sticky>
+			<tabbar bind:changeTabar="changeTabar" cityName="{{cityName}}"></tabbar>
+		</mp-sticky>
 		<view class="movie_body">
 			<view class="movie_ul">
 				<view class="movie_li" wx:for="{{movieList}}" wx:key="id" bindtap="detail" data-movieid="{{item.id}}">

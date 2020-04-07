@@ -2,10 +2,38 @@ const app = getApp();
 Page({
   data: {
     cinemaList : [],
-    cityId : 10
+    cityId : 10,
+    show:false
   },
   onPullDownRefresh:function(){
-    this.fetchCinema({cityId : this.data.cityId});
+    this.setData({show : true});
+    app.api2.getCinemas({cityId : this.data.cityId}).then((res)=>{
+      let cinemaList = res.data.cinemas;
+      let changeCinemaList = cinemaList.map((item)=>{
+        let tags = item.tag;
+        let changeTags = [];
+        for (const key in tags) {
+          if (tags.hasOwnProperty(key)) {
+            const element = tags[key];
+            if (element === 1) {
+              changeTags.push({
+                text : this.formatCard(key),
+                classn :  this.classCard(key)
+              });
+            }
+          }
+        };
+        item.showTag = changeTags;
+        return item;
+      });
+      this.setData({
+        cinemaList : [...changeCinemaList,...this.data.cinemaList],
+        show:false 
+      });
+      wx.stopPullDownRefresh();
+    }).catch((err)=>{
+      console.log(err);
+    });
   },
   onLoad: function (options) {
     this.fetchCinema({cityId : this.data.cityId});
@@ -17,7 +45,6 @@ Page({
         selected: 1
       })
     }
-
   },
   fetchCinema(params){
     wx.showLoading({mask:true});
