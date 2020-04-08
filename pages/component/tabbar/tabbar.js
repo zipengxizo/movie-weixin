@@ -3,6 +3,10 @@ Component({
     cityName: {
       type: String,
       value: '',
+    },
+    currentTab:{
+      type:Number,
+      value :0
     }
   },
   data: {
@@ -11,23 +15,15 @@ Component({
     selectedColor: "#3cc51f",
     list: [{
       pagePath: "/pages/movie/movie",
-      iconPath: "/image/icon_component.png",
-      selectedIconPath: "/image/icon_component_HL.png",
       text: ""
     }, {
       pagePath: "/pages/movie/movie",
-      iconPath: "/image/icon_API.png",
-      selectedIconPath: "/image/icon_API_HL.png",
       text: "正在热映"
     }, {
       pagePath: "/pages/comingmoive/comingmoive",
-      iconPath: "/image/icon_API.png",
-      selectedIconPath: "/image/icon_API_HL.png",
       text: "即将上映"
     }, {
       pagePath: "/pages/movie/movie",
-      iconPath: "/image/icon_API.png",
-      selectedIconPath: "/image/icon_API_HL.png",
       text: ""
     }]
   },
@@ -36,7 +32,6 @@ Component({
   methods: {
     switchTab(e) {
       const data = e.currentTarget.dataset
-      const url = data.path;
       const index = data.index;
       if (index === 0) {
         wx.navigateTo({
@@ -49,7 +44,7 @@ Component({
         })
       }
       if (index === 1 || index === 2) {
-        this.triggerEvent('changeTabar',{index:index});
+        this.triggerEvent('changeTabar',{index:index - 1});
       }
       this.setData({
         selected: data.index

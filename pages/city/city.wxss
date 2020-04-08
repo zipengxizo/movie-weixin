@@ -16,3 +16,8 @@
 .city_body .city_sort .ul{ padding-left: 10px; margin-top: 10px;}
 .city_body .city_sort .ul .li{ line-height: 30px; line-height: 30px;}
 .city_body .city_index{ width:20px; display: flex; flex-direction:column; justify-content:center; text-align: center; border-left:1px #e6e6e6 solid;}
+.city_body .city_index .active{
+    border-radius: 50%;
+    color: #fff;
+    background-color: green;
+}

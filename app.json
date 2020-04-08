@@ -4,9 +4,9 @@
     "pages/cinema/cinema",
     "pages/login/login",
     "pages/detail/detail",
+    "pages/city/city",
     "pages/center/center",
     "pages/research/resarch",
-    "pages/city/city",
     "pages/comingmoive/comingmoive"
   ],
   "tabBar": {

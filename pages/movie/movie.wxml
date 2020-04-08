@@ -1,26 +1,50 @@
 <view id="main">
 	<view id="content">
-        <loading type="dot-gray" show="{{show}}"></loading>
+		<loading type="dot-gray" show="{{show}}"></loading>
 		<mp-sticky>
-			<tabbar bind:changeTabar="changeTabar" cityName="{{cityName}}"></tabbar>
+			<tabbar bind:changeTabar="changeTabar" cityName="{{cityName}}" currentTab="{{currentTab + 1}}"></tabbar>
 		</mp-sticky>
-		<view class="movie_body">
-			<view class="movie_ul">
-				<view class="movie_li" wx:for="{{movieList}}" wx:key="id" bindtap="detail" data-movieid="{{item.id}}">
-					<view class="pic_show">
-						<image class="img" src="{{item.img}}"></image>
-					</view>
-					<view class="info_list">
-						<view class="info_h">{{item.nm}}</view>
-						<view class="info_p">{{item.wish}}人想看</view>
-						<view class="info_p">主演: {{item.star}}</view>
-						<view class="info_p">{{item.rt}}上映</view>
-					</view>
-					<view class="btn_pre" catchtap="sell" data-movieid="{{item.id}}">
-						预售
+		<swiper current="{{currentTab}}" style='height:{{widHeight}}' duration="300" bindchange="swiperTab">
+			<swiper-item>
+				<view class="movie_body">
+					<view class="movie_ul">
+						<view class="movie_li" wx:for="{{movieOnList}}" wx:key="index" bindtap="detail" data-movieid="{{item.id}}">
+							<view class="pic_show">
+								<image class="img" src="{{item.img}}"></image>
+							</view>
+							<view class="info_list">
+								<view class="info_h">{{item.nm}}</view>
+								<view class="info_p">{{item.wish}}人想看</view>
+								<view class="info_p">主演: {{item.star}}</view>
+								<view class="info_p">{{item.rt}}上映</view>
+							</view>
+							<view class="btn_pre" catchtap="sell" data-movieid="{{item.id}}">
+								预售
+							</view>
+						</view>
 					</view>
 				</view>
-			</view>
-		</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="movie_body">
+					<view class="movie_ul">
+						<view class="movie_li" wx:for="{{moviecomingList}}" wx:key="index" bindtap="detail" data-movieid="{{item.id}}">
+							<view class="pic_show">
+								<image class="img" src="{{item.img}}"></image>
+							</view>
+							<view class="info_list">
+								<view class="info_h">{{item.nm}}</view>
+								<view class="info_p">{{item.wish}}人想看</view>
+								<view class="info_p">主演: {{item.star}}</view>
+								<view class="info_p">{{item.rt}}上映</view>
+							</view>
+							<view class="btn_pre" catchtap="sell" data-movieid="{{item.id}}">
+								预售
+							</view>
+						</view>
+					</view>
+				</view>
+			</swiper-item>
+		</swiper>
 	</view>
 </view>

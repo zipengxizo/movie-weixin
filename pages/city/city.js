@@ -4,7 +4,8 @@ Page({
         cityList : [],
         hotList : [],
         topArr : [],
-        scrollTop: 0
+        scrollTop: 0,
+        selectIndex: 0
 
     },
     onLoad: function (options) {
@@ -39,7 +40,6 @@ Page({
                 hotList.push(cities[m]);
             }
         }
-
         for (var i = 0; i < cities.length; i++) {
             var firstLetter = cities[i].py.substring(0, 1).toUpperCase();
             if (toCom(firstLetter)) {  //新添加index
@@ -83,7 +83,20 @@ Page({
     scrollIndex(e){
         let selectIndex = e.currentTarget.dataset.index;
         this.setData({scrollTop:this.data.topArr[selectIndex]});
-          
+    },
+    scroll(e){
+        let {scrollTop} = e.detail;
+        let arr = this.data.topArr;
+        let selectIndex = 0
+        for (let index = 0; index < arr.length; index++) {
+            if (arr[index] > scrollTop) {
+                selectIndex = index-1;
+                break;
+            }
+        }
+        if (selectIndex !== this.data.selectIndex) {
+            this.setData({selectIndex : selectIndex});
+        }
     },
     getAllRects(){
         let that = this;
