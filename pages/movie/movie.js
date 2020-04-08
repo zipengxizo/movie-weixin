@@ -11,7 +11,7 @@ Page({
     let params = { cityId: this.data.cityId };
     this.setData({show : true});
     if (this.data.index === 1) {
-      app.api2.getMovieOn(params).then((res)=>{
+      app.api2.getMovieOnSelf(params).then((res)=>{
         let movieList = res.data.movieList;
         let changeMovieList = movieList.map((item) => {
           item.id = item.id + Math.random()*100;
@@ -103,7 +103,7 @@ Page({
   },
   fetchOnMovie(params) {
     wx.showLoading({mask:true});
-    app.api2.getMovieOn(params).then((res) => {
+    app.api2.getMovieOnSelf(params).then((res) => {
       let movieList = res.data.movieList;
       let changeMovieList = movieList.map((item) => {
         item.img = item.img.replace(/w\.h/, '128.180');

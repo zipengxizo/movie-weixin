@@ -3,7 +3,7 @@
  * description: 所有的接口
  */
 import request from './request.js';
-import { baseUrl, baseUrl2, url } from './base.js';
+import { baseUrl, baseUrl2,baseUrl3, url } from './base.js';
 
 class api {
   constructor() {
@@ -39,6 +39,14 @@ class api {
    */
   getMovieOn(data) {
     return this._request.getRequest(this._baseUrl + url.movieOn, data, this._defaultHeader, 'GET').then(res => res.data)
+  };
+
+  /**
+   * 查询正在上映(自己的接口)
+   * @param {查询正在上映} data 
+   */
+  getMovieOnSelf(data) {
+    return this._request.getRequest(baseUrl2 + url.movieOnSelf, data, this._defaultHeader, 'GET').then(res => res.data)
   };
   /**
    * 查询即将上映
