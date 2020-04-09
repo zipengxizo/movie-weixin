@@ -17,7 +17,7 @@
 	</view>
 	<view class="city_index">
 		<view class="ul">
-			<view class="li {{selectIndex === index ? 'active' :''}}" bindtap="scrollIndex" data-index="index" wx:for="{{cityList}}" wx:key="index">{{item.index}}</view>
+			<view class="li {{selectIndex === index ? 'active' :''}}" bindtap="scrollIndex" data-index="{{index}}" wx:for="{{cityList}}" wx:key="index">{{item.index}}</view>
 		</view>
 	</view>
 </view>

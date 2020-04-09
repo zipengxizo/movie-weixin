@@ -2,91 +2,103 @@ const app = getApp();
 Page({
   data: {
     movieOnList: [],
-    moviecomingList :[],
-    widHeight:0,
-    cityId: wx.getStorageSync('cityId') || 1,
-    cityName: wx.getStorageSync('cityName') || '北京',
+    moviecomingList: [],
+    widHeight: 0,
+    cityId: app.globalData.cityId,
+    cityName: app.globalData.cityName,
     show: false,
-    currentTab:0
+    currentTab: 0,
+    bottomShow: false,
+    tip: '下拉加载'
   },
-  swiperTab(e){
+  swiperTab(e) {
     let currentTab = e.detail.current;
-    this.setData({currentTab : currentTab});
-    let params = { cityId: this.data.cityId };
-    if (currentTab === 0) {
-      this.fetchOnMovie(params,currentTab);
+    console.log(currentTab);
+    this.setData({ currentTab: currentTab });
+    let {cityId,movieOnList,moviecomingList} = this.data;
+    let params = { cityId: cityId };
+    //重新计算swiper的高度
+    this.getAllRects(currentTab);
+    if (currentTab === 0 && movieOnList.length === 0) {
+      wx.showLoading();
+      this.fetchOnMovie(params, currentTab).then(()=>{
+        wx.hideLoading();
+      })
     }
-    else if(currentTab === 1)
-      this.fetchComingMovie(params,currentTab);
+    else if (currentTab === 1 && moviecomingList.length === 0){
+      wx.showLoading();
+      this.fetchComingMovie(params, currentTab).then(()=>{
+        wx.hideLoading();
+      })
+    }
+  },
+  onReachBottom() {
+    let { cityId, currentTab } = this.data;
+    let params = { cityId: cityId };
+    this.setData({
+      tip: '加载中...',
+      bottomShow: true
+    });
+    if (currentTab === 0) {
+      //1:添加到尾部
+      this.fetchOnMovie(params, currentTab, 1).then(()=>{
+        this.setData({
+          tip: '下拉加载',
+          bottomShow: false
+        });
+      })
+    }
+    else if (currentTab === 1) {
+      this.fetchComingMovie(params, currentTab, 1).then(()=>{
+        this.setData({
+          tip: '下拉加载',
+          bottomShow: false
+        });
+      })
+    }
   },
   onPullDownRefresh: function () {
-    let params = { cityId: this.data.cityId };
-    this.setData({show : true});
-    if (this.data.currentTab === 0) {
-      app.api2.getMovieOnSelf(params).then((res)=>{
-        let movieList = res.data.movieList;
-        let changeMovieList = movieList.map((item) => {
-          item.id = item.id + Math.random()*100;
-          item.img = item.img.replace(/w\.h/, '128.180');
-          return item;
-        });
-        movieList = 
-        this.setData({ 
-          movieOnList: [...this.data.movieOnList,...changeMovieList],
-          show : false
-        });
-        this.getAllRects(this.data.currentTab);
+    let { cityId, currentTab } = this.data;
+    let params = { cityId: cityId };
+    this.setData({ show: true });
+    wx.showLoading({ mask: true });
+    if (currentTab === 0) {
+      this.fetchOnMovie(params, currentTab, 0).then(() => {
+        this.setData({ show: false });
+        wx.hideLoading();
       });
-    }else if(this.data.currentTab === 1){
-      app.api2.getMoiveComing(params).then((res)=>{
-        let movieList = res.data.comingList;
-        let changeMovieList = movieList.map((item) => {
-          item.img = item.img.replace(/w\.h/, '128.180');
-          return item;
-        });
-        this.setData({ 
-          moviecomingList :  [...this.data.moviecomingList,...changeMovieList],
-          show:false 
-        });
-        this.getAllRects(this.data.currentTab);
+    } else if (currentTab === 1) {
+      this.fetchComingMovie(params, currentTab, 0).then(() => {
+        this.setData({ show: false });
+        wx.hideLoading();
       })
     }
     wx.stopPullDownRefresh();
   },
-  getAllRects(index){
+  getAllRects(index) {
     let movieItem = index === 0 ? this.data.movieOnList.length : this.data.moviecomingList.length;
-    wx.createSelectorQuery().select('.movie_li').boundingClientRect((rect)=>{
+    wx.createSelectorQuery().select('.movie_li').boundingClientRect((rect) => {
       this.setData({
-        height: rect.height ,
         widHeight: rect.height * movieItem + "px"
       })
     }).exec();
   },
   onLoad: function () {
+    let { cityId, currentTab } = this.data;
     let storegeCityId = wx.getStorageSync('cityId');
     let storeCityName = wx.getStorageSync('cityName');
-    if (storegeCityId && storegeCityId !== this.data.cityId) {
+    if (storegeCityId && storegeCityId !== cityId) {
       this.setData({ cityId: storegeCityId });
       this.setData({ cityName: storeCityName });
     };
-    let params = { cityId: this.data.cityId };
-    this.fetchOnMovie(params,this.data.currentTab);
-  },
-  onShow: function () {
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0
-      })
-    }
+    let params = { cityId: cityId };
+    this.fetchOnMovie(params, currentTab);
   },
   changeTabar(e) {
-    let params = { cityId: this.data.cityId };
     let index = e.detail.index;
-    this.setData({ 
+    this.setData({
       currentTab: index,
-     });
-    this.data.index === 1 ? this.fetchOnMovie(params,index) : this.fetchComingMovie(params,index);
+    });
   },
   detail(e) {
     let movieid = e.currentTarget.dataset.movieid;
@@ -108,42 +120,62 @@ Page({
       });
     } else {
       console.log(movieid);
-      //预售页面
     }
   },
-  fetchComingMovie(params,index) {
-    wx.showLoading({mask:true});
-    app.api2.getMoiveComing(params).then((res) => {
-      let movieList = res.data.comingList;
-      let changeMovieList = movieList.map((item) => {
-        item.img = item.img.replace(/w\.h/, '128.180');
-        return item;
+  fetchComingMovie(params, index, order = 0) {
+    return new Promise((resolve, reject) => {
+      app.api2.getMoiveComing(params).then((res) => {
+        let movieList = res.data.comingList;
+        let changeMovieList = movieList.map((item) => {
+          item.img = item.img.replace(/w\.h/, '128.180');
+          return item;
+        });
+        if (order === 0) {
+          this._movieComingListSet(changeMovieList, this.data.moviecomingList);
+        }
+        else if (order === 1) {
+          this._movieComingListSet(this.data.moviecomingList, changeMovieList);
+        }
+        wx.nextTick(() => {
+          this.getAllRects(index);
+        })
+        resolve();
+      }).catch((err) => {
+        reject(err);
       });
-      this.setData({ moviecomingList: changeMovieList });
-      wx.nextTick(()=>{
-        this.getAllRects(index);
-      })
-      wx.hideLoading();
-    }).catch((err) => {
-      console.log(err);
-    });
-
+    })
   },
-  fetchOnMovie(params,index) {
-    wx.showLoading({mask:true});
-    app.api2.getMovieOnSelf(params).then((res) => {
-      let movieList = res.data.movieList;
-      let changeMovieList = movieList.map((item) => {
-        item.img = item.img.replace(/w\.h/, '128.180');
-        return item;
+  fetchOnMovie(params, index, order = 0) {
+    return new Promise((resolve, reject) => {
+      app.api2.getMovieOnSelf(params).then((res) => {
+        let movieList = res.data.movieList;
+        let changeMovieList = movieList.map((item) => {
+          item.img = item.img.replace(/w\.h/, '128.180');
+          return item;
+        });
+        if (order === 0) {
+          this._movieOnListSet(changeMovieList, this.data.movieOnList);
+        }
+        else if (order === 1) {
+          this._movieOnListSet(this.data.movieOnList, changeMovieList);
+        }
+        wx.nextTick(() => {
+          this.getAllRects(index);
+        });
+        resolve();
+      }).catch((err) => {
+        reject(err);
       });
-      this.setData({ movieOnList : changeMovieList });
-      wx.nextTick(()=>{
-        this.getAllRects(index);
-      });
-      wx.hideLoading();
-    }).catch((err) => {
-      console.log(err);
+    })
+  },
+  _movieOnListSet(headMolist, bottomMolist) {
+    this.setData({
+      movieOnList: [...headMolist, ...bottomMolist]
     });
-  }
+  },
+  _movieComingListSet(headMolist, bottomMolist) {
+    this.setData({
+      moviecomingList: [...headMolist, ...bottomMolist]
+    });
+  },
 });

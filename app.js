@@ -1,6 +1,5 @@
 
 import api from './utils/api.js';
-
 import {promisifyAll } from 'miniprogram-api-promise';
 const wxp = {}
 promisifyAll(wx, wxp);
@@ -50,6 +49,8 @@ App({
     });
   },
   globalData: {
+    cityId : wx.getStorageSync('cityId') || 1,
+    cityName: wx.getStorageSync('cityName') || '北京',
     userInfo : null,
     hasLogin: wx.getStorageSync('token') ? true : false,
   },

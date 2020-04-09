@@ -46,5 +46,6 @@
 				</view>
 			</swiper-item>
 		</swiper>
+		<view class="bottom-tip" wx:if="{{bottomShow}}">{{tip}}</view>
 	</view>
 </view>
