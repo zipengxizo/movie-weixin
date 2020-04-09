@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "miniprogram-api-promise": "^1.0.4"
+    "miniprogram-api-promise": "^1.0.4",
+    "miniprogram-computed": "^2.1.1"
   },
   "devDependencies": {},
   "scripts": {

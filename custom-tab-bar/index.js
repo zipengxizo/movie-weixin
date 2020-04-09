@@ -26,6 +26,13 @@ Component({
       },
       {
         "current": 0,
+        "pagePath": "/pages/cart/cart",
+        "iconPath": "/imgs/home.png",
+        "selectedIconPath": "/imgs/home_on.png",
+        "text": "购物车"
+      },
+      {
+        "current": 0,
         "pagePath": "/pages/center/center",
         "iconPath": "/imgs/category.png",
         "selectedIconPath": "/imgs/category_on.png",
@@ -38,9 +45,6 @@ Component({
       const url = e.currentTarget.dataset.path;
       const index = e.currentTarget.dataset.index;
       wx.switchTab({url});
-      this.setData({
-        selected: index
-      })
     }
   }
   

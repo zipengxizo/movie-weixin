@@ -13,21 +13,20 @@ Page({
   },
   swiperTab(e) {
     let currentTab = e.detail.current;
-    console.log(currentTab);
     this.setData({ currentTab: currentTab });
-    let {cityId,movieOnList,moviecomingList} = this.data;
+    let { cityId, movieOnList, moviecomingList } = this.data;
     let params = { cityId: cityId };
     //重新计算swiper的高度
     this.getAllRects(currentTab);
     if (currentTab === 0 && movieOnList.length === 0) {
       wx.showLoading();
-      this.fetchOnMovie(params, currentTab).then(()=>{
+      this.fetchOnMovie(params, currentTab).then(() => {
         wx.hideLoading();
       })
     }
-    else if (currentTab === 1 && moviecomingList.length === 0){
+    else if (currentTab === 1 && moviecomingList.length === 0) {
       wx.showLoading();
-      this.fetchComingMovie(params, currentTab).then(()=>{
+      this.fetchComingMovie(params, currentTab).then(() => {
         wx.hideLoading();
       })
     }
@@ -41,7 +40,7 @@ Page({
     });
     if (currentTab === 0) {
       //1:添加到尾部
-      this.fetchOnMovie(params, currentTab, 1).then(()=>{
+      this.fetchOnMovie(params, currentTab, 1).then(() => {
         this.setData({
           tip: '下拉加载',
           bottomShow: false
@@ -49,7 +48,7 @@ Page({
       })
     }
     else if (currentTab === 1) {
-      this.fetchComingMovie(params, currentTab, 1).then(()=>{
+      this.fetchComingMovie(params, currentTab, 1).then(() => {
         this.setData({
           tip: '下拉加载',
           bottomShow: false
@@ -110,16 +109,45 @@ Page({
     })
   },
   sell(e) {
-    let movieid = e.currentTarget.dataset.movieid;
+    let { movie } = e.currentTarget.dataset;
     if (!wx.getStorageSync('token')) {
       app.wx.navigateTo({
         url: '/pages/login/login'
       }).then((res) => {
-        res.eventChannel.emit('fullUrl', { data: `/pages/detail/detail?movieId=${movieid}` });
+        res.eventChannel.emit('fullUrl', { data: `/pages/detail/detail?movieId=${movie.id}` });
 
       });
     } else {
-      console.log(movieid);
+      let movieStore = wx.getStorageSync('movie');
+      let { id, nm, img } = movie;
+      let newMovieItem = [{ id: id, title: nm, image: img, num: 1, price: Math.floor(Math.random() * 100 + 1), selected: true }];
+      if (movieStore.length > 0) {
+        movieStore = JSON.parse(movieStore);
+        let has = false;
+        let newMovie = movieStore.carts.map((item, index) => {
+          if (id === item.id) {
+            item.num += 1;
+            has = true;
+            return item;
+          }else{
+            return item;
+          }
+        });
+        if (has) {
+          wx.setStorageSync('movie', JSON.stringify({ carts: newMovie}));
+        }
+        else{
+          wx.setStorageSync('movie', JSON.stringify({carts:[...newMovieItem,...movieStore.carts]}))
+        }
+      }
+      else {
+        wx.setStorageSync('movie', JSON.stringify({ carts: newMovieItem }));
+      }
+      wx.showToast({
+        title: '预定成功',
+        icon:'none',
+        mask:true 
+      })
     }
   },
   fetchComingMovie(params, index, order = 0) {

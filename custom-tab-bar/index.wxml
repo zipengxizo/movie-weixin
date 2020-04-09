@@ -1,14 +1,3 @@
-<!-- <view class="tabBar">
-  <block wx:for="{{list}}" wx:for-item="item" wx:key="tabBar">
-    <view class="tabBar-item"  data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
-      <navigator open-type="redirect" url="{{item.pagePath}}">
-        <view><image class="icon" src='{{item.iconPath}}'></image></view>
-        <view class="{{item.current== 1 ? 'tabBartext' :''}}">{{item.text}}</view>
-      </navigator>  
-    </view>
-  </block>
-</view> -->
-
 <view class="tab-bar">
   <view class="tab-bar-border"></view>
   <view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">

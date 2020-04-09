@@ -4,6 +4,7 @@
     "pages/cinema/cinema",
     "pages/login/login",
     "pages/detail/detail",
+    "pages/cart/cart",
     "pages/city/city",
     "pages/center/center",
     "pages/research/resarch",
@@ -30,6 +31,13 @@
         "iconPath": "/imgs/message.png",
         "selectedIconPath": "/imgs/message_on.png",
         "text": "影院"
+      },
+      {
+        "current": 0,
+        "pagePath": "pages/cart/cart",
+        "iconPath": "/imgs/home.png",
+        "selectedIconPath": "/imgs/home_on.png",
+        "text": "购物车"
       },
       {
         "current": 0,

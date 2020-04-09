@@ -11,8 +11,6 @@ Component({
   },
   data: {
     selected: 1,
-    color: "#7A7E83",
-    selectedColor: "#3cc51f",
     list: [{
       pagePath: "/pages/movie/movie",
       text: ""

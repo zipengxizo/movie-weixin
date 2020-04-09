@@ -18,7 +18,7 @@
 								<view class="info_p">主演: {{item.star}}</view>
 								<view class="info_p">{{item.rt}}上映</view>
 							</view>
-							<view class="btn_pre" catchtap="sell" data-movieid="{{item.id}}">
+							<view class="btn_pre" catchtap="sell" data-movie="{{item}}">
 								预售
 							</view>
 						</view>
@@ -38,7 +38,7 @@
 								<view class="info_p">主演: {{item.star}}</view>
 								<view class="info_p">{{item.rt}}上映</view>
 							</view>
-							<view class="btn_pre" catchtap="sell" data-movieid="{{item.id}}">
+							<view class="btn_pre" catchtap="sell" data-movie="{{item}}">
 								预售
 							</view>
 						</view>
