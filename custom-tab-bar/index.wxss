@@ -27,6 +27,7 @@
   align-items: center;
   flex-direction: column;
   padding-top: 16rpx;
+  position: relative;
 }
 
 .cover-image {
@@ -45,4 +46,15 @@
   top: 5rpx;
   border-radius: 50%;
   border: 6rpx solid #fff;
+}
+.cart-count{
+  position: absolute;
+  top: 5rpx;
+  right: 40rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  font-size: 14px;
 }

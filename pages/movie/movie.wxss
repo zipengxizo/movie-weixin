@@ -31,3 +31,17 @@
 .city_body .city_sort ul{ padding-left: 20rpx; margin-top: 20rpx;}
 .city_body .city_sort ul li{ line-height: 60rpx; line-height: 60rpx;}
 .city_body .city_index{ width:40rpx; display: flex; flex-direction:column; justify-content:center; text-align: center; border-left:2rpx #e6e6e6 solid;}
+
+.animation-dot{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 40rpx;
+    height: 40rpx;
+    background-color: #f03d37;
+    border-radius: 50%;
+    z-index: 100;
+    opacity: 0;
+    font-size: 12px;
+    color: #fff;
+}

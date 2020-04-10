@@ -1,9 +1,9 @@
 const computedBehavior = require('miniprogram-computed')
 Component({
   data: {
-    carts: [],               // 购物车列表
-    hasList: false,          // 列表是否有数据
-    selectAllStatus: true    // 全选状态，默认全选
+    carts: [],               
+    hasList: false,         
+    selectAllStatus: true,
 
   },
   behaviors: [computedBehavior],
@@ -28,6 +28,20 @@ Component({
         }
       }
       return total;
+    }
+  },
+  observers:{
+    'carts':function(){
+      let count = 0;
+      let {carts} = this.data;
+      for (let i = 0; i < carts.length; i++) {
+        count += carts[i].num;
+      };
+      this.getTabBar() && this.getTabBar().setData({
+        cartCount : count
+      });
+      wx.setStorageSync('movie', JSON.stringify({carts:this.data.carts}));
+      wx.setStorageSync('cartCout', count);
 
     }
   },
@@ -36,9 +50,10 @@ Component({
       if (typeof this.getTabBar === 'function' &&
         this.getTabBar()) {
         this.getTabBar().setData({
-          selected: 2
+          selected: 2,
+          cartCount :wx.getStorageSync('cartCout')
         })
-      }
+      };
       let movieStore = wx.getStorageSync('movie');
       let cartsObj = movieStore.length > 0 ? JSON.parse(movieStore) : [];
       if (cartsObj.length === 0) return;

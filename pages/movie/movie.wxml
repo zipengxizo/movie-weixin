@@ -1,6 +1,7 @@
 <view id="main">
 	<view id="content">
 		<loading type="dot-gray" show="{{show}}"></loading>
+		<view class="animation-dot" animation="{{animation}}"></view>
 		<mp-sticky>
 			<tabbar bind:changeTabar="changeTabar" cityName="{{cityName}}" currentTab="{{currentTab + 1}}"></tabbar>
 		</mp-sticky>

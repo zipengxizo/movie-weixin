@@ -7,8 +7,9 @@ Component({
   },
   data: {
     selected : 0,
+    cartCount : wx.getStorageSync('cartCout'),
     // color: "#7A7E83",
-    // selectedColor: "#3cc51f",
+    selectedColor: "#dd3924",
     list : [
       { "current":0,
         "pagePath": "/pages/movie/movie",
@@ -27,8 +28,8 @@ Component({
       {
         "current": 0,
         "pagePath": "/pages/cart/cart",
-        "iconPath": "/imgs/home.png",
-        "selectedIconPath": "/imgs/home_on.png",
+        "iconPath": "/imgs/cart.png",
+        "selectedIconPath": "/imgs/cart_on.png",
         "text": "购物车"
       },
       {
@@ -43,9 +44,15 @@ Component({
   methods: {
     switchTab(e){
       const url = e.currentTarget.dataset.path;
-      const index = e.currentTarget.dataset.index;
       wx.switchTab({url});
-    }
-  }
+    },
+  },
+  lifetimes: {
+    attached: function() {
+    },
+    detached: function() {
+      // 在组件实例被从页面节点树移除时执行
+    },
+  },
   
 })

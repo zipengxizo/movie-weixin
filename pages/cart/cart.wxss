@@ -1,6 +1,6 @@
 
 .cart-box{
-    margin-bottom: 190rpx;
+    padding-bottom: 190rpx;
 }
 .cart-list{
     position: relative;

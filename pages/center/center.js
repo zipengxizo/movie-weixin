@@ -1,11 +1,11 @@
 const app = getApp();
 Page({
   data: {
-    isshow : false,
+    isshow: false,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    openid:''
+    openid: ''
 
   },
   onLoad: function () {
@@ -35,34 +35,35 @@ Page({
   },
   onShow: function () {
     let bol = wx.getStorageSync('token') ? true : false;
-    this.setData({ isshow: bol,openid :wx.getStorageSync('openid') });
+    this.setData({ isshow: bol, openid: wx.getStorageSync('openid') });
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
-        selected: 3
+        selected: 3,
+        cartCount: wx.getStorageSync('cartCout')
       })
     }
   },
   getUserInfo: function (e) {
-    if(!e.detail.userInfo) return;
+    if (!e.detail.userInfo) return;
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
-      hasUserInfo : true
-      
+      hasUserInfo: true
+
     })
   },
-  logout(){
+  logout() {
     let self = this;
     wx.showModal({
       title: '提示',
       content: '确定退出',
-      success (res) {
+      success(res) {
         if (res.confirm) {
           wx.removeStorageSync('token');
           wx.removeStorageSync('openid');
           app.globalData.userInfo = null;
-          self.setData({userInfo : {}});
+          self.setData({ userInfo: {} });
           wx.navigateTo({
             url: '/pages/login/login'
           });
@@ -71,15 +72,15 @@ Page({
       }
     })
   },
-  pay(){
+  pay() {
     if (!wx.getStorageSync('token')) {
       wx.navigateTo({
         url: '/pages/login/login',
-      }).then((res)=>{
-        res.eventChannel.emit('fullUrl', { data: '/pages/center/center'});
+      }).then((res) => {
+        res.eventChannel.emit('fullUrl', { data: '/pages/center/center' });
       });
     }
-    else{
+    else {
       console.log('next to');
     }
   }

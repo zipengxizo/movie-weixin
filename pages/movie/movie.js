@@ -9,7 +9,7 @@ Page({
     show: false,
     currentTab: 0,
     bottomShow: false,
-    tip: '下拉加载'
+    tip: '下拉加载',
   },
   swiperTab(e) {
     let currentTab = e.detail.current;
@@ -91,7 +91,19 @@ Page({
       this.setData({ cityName: storeCityName });
     };
     let params = { cityId: cityId };
-    this.fetchOnMovie(params, currentTab);
+    wx.showLoading();
+    this.fetchOnMovie(params, currentTab).then(()=>{
+      wx.hideLoading();
+    })
+  },
+  onShow:function(){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0,
+        cartCount: wx.getStorageSync('cartCout')
+      })
+    }
   },
   changeTabar(e) {
     let index = e.detail.index;
@@ -115,38 +127,64 @@ Page({
         url: '/pages/login/login'
       }).then((res) => {
         res.eventChannel.emit('fullUrl', { data: `/pages/detail/detail?movieId=${movie.id}` });
-
       });
     } else {
       let movieStore = wx.getStorageSync('movie');
       let { id, nm, img } = movie;
       let newMovieItem = [{ id: id, title: nm, image: img, num: 1, price: Math.floor(Math.random() * 100 + 1), selected: true }];
+      let cartCout = 0;
       if (movieStore.length > 0) {
         movieStore = JSON.parse(movieStore);
         let has = false;
         let newMovie = movieStore.carts.map((item, index) => {
           if (id === item.id) {
             item.num += 1;
+            cartCout += item.num;
             has = true;
             return item;
-          }else{
+          } else {
+            cartCout += item.num;
             return item;
           }
         });
         if (has) {
-          wx.setStorageSync('movie', JSON.stringify({ carts: newMovie}));
+          wx.setStorageSync('movie', JSON.stringify({ carts: newMovie }));
         }
-        else{
-          wx.setStorageSync('movie', JSON.stringify({carts:[...newMovieItem,...movieStore.carts]}))
+        else {
+          wx.setStorageSync('movie', JSON.stringify({ carts: [...newMovieItem, ...movieStore.carts] }));
         }
+        wx.setStorageSync('cartCout', cartCout);
       }
       else {
         wx.setStorageSync('movie', JSON.stringify({ carts: newMovieItem }));
+        wx.setStorageSync('cartCout', 1);
       }
-      wx.showToast({
-        title: '预定成功',
-        icon:'none',
-        mask:true 
+      this.getTabBar() && this.getTabBar().setData({ cartCount: cartCout });
+      let windowWidth,windowHeight;
+      try {
+        const res = wx.getSystemInfoSync();
+        windowWidth = res.windowWidth,windowHeight = res.windowHeight;
+      } catch (error) {
+        console.log(err)
+      }
+      let x = e.detail.x,y = e.detail.y;
+      // let clientX = e.changedTouches[0].clientX,clientY = e.changedTouches[0].clientY;
+      let animation = wx.createAnimation({
+        delay: 0,
+        timingFunction:'ease-in'
+      });
+      animation.translate(x,y).step();//初始点
+      animation.translate(windowWidth/2,windowHeight/2).opacity(1).scale(3,3).step();//中间点
+      animation.translate(windowWidth-120,windowHeight).opacity(0).scale(1,1).step();//购物车
+      this.setData({
+        animation : animation.export()
+      });
+      wx.nextTick(()=>{
+        wx.showToast({
+          title: '预定成功',
+          icon: 'none',
+          mask: true
+        })
       })
     }
   },
