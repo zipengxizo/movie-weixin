@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wxml-to-canvas": "wxml-to-canvas"
+  }
 }

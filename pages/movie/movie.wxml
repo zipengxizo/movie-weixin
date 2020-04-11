@@ -48,5 +48,6 @@
 			</swiper-item>
 		</swiper>
 		<view class="bottom-tip" wx:if="{{bottomShow}}">{{tip}}</view>
+		<back-to-top backToTopShow="{{backToTopShow}}"></back-to-top>
 	</view>
 </view>

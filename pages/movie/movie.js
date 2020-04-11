@@ -10,6 +10,7 @@ Page({
     currentTab: 0,
     bottomShow: false,
     tip: '下拉加载',
+    backToTopShow: false
   },
   swiperTab(e) {
     let currentTab = e.detail.current;
@@ -186,6 +187,16 @@ Page({
           mask: true
         })
       })
+    }
+  },
+  onPageScroll:function(e){
+    let {scrollTop} = e;
+    let {backToTopShow} = this.data;
+    if (!backToTopShow && scrollTop > 400) {
+      this.setData({backToTopShow:true});
+    }
+    if (backToTopShow && scrollTop === 0) {
+      this.setData({backToTopShow:false});
     }
   },
   fetchComingMovie(params, index, order = 0) {

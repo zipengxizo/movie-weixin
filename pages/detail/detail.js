@@ -1,15 +1,74 @@
 const app = getApp();
+let { wxml, style } = require('./canvas-tpl.js');
 Page({
   data: {
     detailMovie: {},
   },
   onLoad: function (options) {
+    this.widget = this.selectComponent('.widget');
     let movieId = options.movieId;
+    // movieId = 1302494;
     this.fetchOnMovieDetail({ movieId: movieId });
   },
+  renderToCanvas() {
+    wx.showLoading({
+      title: '生成中...',
+    })
+    wxml = wxml.replace(/{{img}}/g,this.data.detailMovie.img)
+    .replace(/{{nm}}/g,this.data.detailMovie.nm)
+    .replace(/{{enm}}/g,this.data.detailMovie.enm)
+    .replace(/{{sc}}/g,this.data.detailMovie.sc)
+    .replace(/{{cat}}/g,this.data.detailMovie.cat)
+    .replace(/{{src}}/g,this.data.detailMovie.src)
+    .replace(/{{dur}}/g,this.data.detailMovie.dur)
+    .replace(/{{pubDesc}}/g,this.data.detailMovie.pubDesc)
+    .replace(/{{dra}}/g,this.data.detailMovie.dra);
+    this.widget.renderToCanvas({ wxml, style }).then((res) => {
+      this.container = res
+      this.extraImage();
+      wx.hideLoading();
+    })
+  },
+  extraImage() {
+    this.widget.canvasToTempFilePath().then((res) => {
+      let path = res.tempFilePath
+      wx.getSetting({
+        success(res) {
+          if (!res.authSetting['scope.writePhotosAlbum']) {
+            wx.authorize({
+              scope: 'scope.writePhotosAlbum',
+              success() {
+                wx.saveImageToPhotosAlbum({
+                  filePath: path,
+                  success(res) {
+                    wx.showToast({
+                      title: '保存成功'
+                    })
+                  }
+                })
+              }
+            })
+          }
+          else {
+            wx.saveImageToPhotosAlbum({
+              filePath: path,
+              success(res) {
+                wx.showToast({
+                  title: '保存成功'
+                })
+              }
+            })
+          }
+        }
+      })
+    });
+  },
+  onUnload: function () {
+    this.widget = null;
+  },
   fetchOnMovieDetail(params) {
-    if(!params.movieId) return false;
-    wx.showLoading({mask:true});
+    if (!params.movieId) return false;
+    wx.showLoading({ mask: true });
     app.api2.getMovieDetai(params).then((res) => {
       let detailMovie = res.data.detailMovie;
       for (const key in detailMovie) {
@@ -29,6 +88,12 @@ Page({
       wx.hideLoading();
     }).catch((err) => {
       console.log(err);
+    })
+  },
+  preview(e) {
+    let { imageurls } = e.currentTarget.dataset;
+    wx.previewImage({
+      urls: imageurls,
     })
   }
 })

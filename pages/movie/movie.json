@@ -2,7 +2,8 @@
   "usingComponents": {
     "tabbar": "../component/tabbar/tabbar",
     "loading": "../component/loading/loading",
-    "mp-sticky": "../component/sticky/index"
+    "mp-sticky": "../component/sticky/index",
+    "back-to-top":"../component/backTotop/backTotop"
   },
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 50

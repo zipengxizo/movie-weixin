@@ -22,10 +22,12 @@
 				{{ detailMovie.dra }}
 			</view>
 		</view>
-		<scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
+		<scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%" bindtap="preview" data-imageurls="{{detailMovie.photos}}">
 			<block wx:for="{{detailMovie.photos}}" wx:key="*this">
-				<image class="img" src="{{item}}" />
+				<image class="img" src="{{item}}" bindtap="preview" />
 			</block>
 		</scroll-view>
 	</view>
+	<button type="primary" bindtap="renderToCanvas">生成分享图片</button>
+	<wxml-to-canvas class="widget"></wxml-to-canvas>
 </view>

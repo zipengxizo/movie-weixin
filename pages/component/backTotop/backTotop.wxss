@@ -1,0 +1,19 @@
+@import "/iconfont/iconfont.wxss";
+.back-to-top{
+    position: fixed;
+    right: 80rpx;
+    bottom: 160rpx;
+    width: 80rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 50%;
+    z-index: 10;
+    background-color:#fff;
+    color: #999;
+    text-align: center;
+    border: 1px solid #eee;
+    transform: rotate(-90deg);
+}
+.back-to-top .back-icon{
+    font-size: 26px;
+}

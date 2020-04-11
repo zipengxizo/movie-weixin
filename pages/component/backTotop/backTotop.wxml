@@ -1,0 +1,3 @@
+<view class="back-to-top" bindtap="backTotop" wx:if="{{backToTopShow}}">
+<icon class="iconfont icon-youjiantou back-icon"></icon>
+</view>
