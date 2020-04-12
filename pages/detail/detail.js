@@ -14,23 +14,24 @@ Page({
       {
           type: 'primary',
           className: '',
-          text: '分享',
+          text: '保存',
           value: 1
       }
   ]
   },
   onLoad: function (options) {
-    this.widget = this.selectComponent('.widget');
     let movieId = options.movieId;
-    movieId = 1302494;
+    // movieId = 1302494;
     this.fetchOnMovieDetail({ movieId: movieId });
+    this.widget = this.selectComponent('.widget');
   },
   renderToCanvas() {
     wx.showLoading({
       title: '生成中...',
     });
     this.setData({show:true});
-    wxml = wxml.replace(/{{img}}/g,this.data.detailMovie.img)
+    let copy = wxml;
+    copy = copy.replace(/{{img}}/g,this.data.detailMovie.img)
     .replace(/{{nm}}/g,this.data.detailMovie.nm)
     .replace(/{{enm}}/g,this.data.detailMovie.enm)
     .replace(/{{sc}}/g,this.data.detailMovie.sc)
@@ -39,7 +40,7 @@ Page({
     .replace(/{{dur}}/g,this.data.detailMovie.dur)
     .replace(/{{pubDesc}}/g,this.data.detailMovie.pubDesc)
     .replace(/{{dra}}/g,this.data.detailMovie.dra);
-    this.widget.renderToCanvas({ wxml, style }).then((res) => {
+    this.widget.renderToCanvas({wxml : copy,style} ).then((res) => {
       this.container = res
       wx.hideLoading();
     })
@@ -48,11 +49,12 @@ Page({
     this.setData({show:false});
   },
   buttontap(e){
-    let {index ,item } = e.detail;
+    let {index} = e.detail;
     if (index === 1) {
       this.extraImage();
     }
     this.setData({show : false});
+    this.widget = null;
   },
   extraImage() {
     this.widget.canvasToTempFilePath().then((res) => {
@@ -87,9 +89,6 @@ Page({
         }
       })
     });
-  },
-  onUnload: function () {
-    this.widget = null;
   },
   fetchOnMovieDetail(params) {
     if (!params.movieId) return false;

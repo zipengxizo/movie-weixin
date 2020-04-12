@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/detail/detail",
     "pages/movie/movie",
     "pages/cinema/cinema",
+    "pages/detail/detail",
     "pages/login/login",
     "pages/cart/cart",
     "pages/city/city",
