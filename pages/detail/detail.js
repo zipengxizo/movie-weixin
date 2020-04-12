@@ -3,17 +3,33 @@ let { wxml, style } = require('./canvas-tpl.js');
 Page({
   data: {
     detailMovie: {},
+    show:false,
+    buttons: [
+      {
+          type: 'default',
+          className: '',
+          text: '取消',
+          value: 0
+      },
+      {
+          type: 'primary',
+          className: '',
+          text: '分享',
+          value: 1
+      }
+  ]
   },
   onLoad: function (options) {
     this.widget = this.selectComponent('.widget');
     let movieId = options.movieId;
-    // movieId = 1302494;
+    movieId = 1302494;
     this.fetchOnMovieDetail({ movieId: movieId });
   },
   renderToCanvas() {
     wx.showLoading({
       title: '生成中...',
-    })
+    });
+    this.setData({show:true});
     wxml = wxml.replace(/{{img}}/g,this.data.detailMovie.img)
     .replace(/{{nm}}/g,this.data.detailMovie.nm)
     .replace(/{{enm}}/g,this.data.detailMovie.enm)
@@ -25,9 +41,18 @@ Page({
     .replace(/{{dra}}/g,this.data.detailMovie.dra);
     this.widget.renderToCanvas({ wxml, style }).then((res) => {
       this.container = res
-      this.extraImage();
       wx.hideLoading();
     })
+  },
+  close(){
+    this.setData({show:false});
+  },
+  buttontap(e){
+    let {index ,item } = e.detail;
+    if (index === 1) {
+      this.extraImage();
+    }
+    this.setData({show : false});
   },
   extraImage() {
     this.widget.canvasToTempFilePath().then((res) => {
@@ -42,7 +67,7 @@ Page({
                   filePath: path,
                   success(res) {
                     wx.showToast({
-                      title: '保存成功'
+                      title: '保存到相册'
                     })
                   }
                 })
@@ -54,7 +79,7 @@ Page({
               filePath: path,
               success(res) {
                 wx.showToast({
-                  title: '保存成功'
+                  title: '保存到相册'
                 })
               }
             })

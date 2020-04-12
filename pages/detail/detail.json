@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "wxml-to-canvas": "wxml-to-canvas"
+    "wxml-to-canvas": "wxml-to-canvas",
+    "mp-halfScreenDialog":"../component/half-screen-dialog/half-screen-dialog"
   }
 }

@@ -29,5 +29,9 @@
 		</scroll-view>
 	</view>
 	<button type="primary" bindtap="renderToCanvas">生成分享图片</button>
-	<wxml-to-canvas class="widget"></wxml-to-canvas>
+	<mp-halfScreenDialog bindbuttontap="buttontap" show="{{show}}" maskClosable="{{true}}" buttons="{{buttons}}">
+		<view slot="desc">
+			<wxml-to-canvas class="widget"></wxml-to-canvas>
+		</view>
+	</mp-halfScreenDialog>
 </view>
