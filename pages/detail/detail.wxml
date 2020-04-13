@@ -5,7 +5,7 @@
 			<view class="detail_list_filter"></view>
 			<view class="detail_list_content">
 				<view class="detail_list_img">
-					<image class="img" src="{{detailMovie.img}}" alt="" />
+					<image class="img" src="{{moviesImg}}" alt="" />
 				</view>
 				<view class="detail_list_info">
 					<view class="h2">{{ detailMovie.nm }}</view>
@@ -22,8 +22,8 @@
 				{{ detailMovie.dra }}
 			</view>
 		</view>
-		<scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%" bindtap="preview" data-imageurls="{{detailMovie.photos}}">
-			<block wx:for="{{detailMovie.photos}}" wx:key="*this">
+		<scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
+			<block wx:for="{{photos}}" wx:key="*this">
 				<image class="img" src="{{item}}" bindtap="preview" />
 			</block>
 		</scroll-view>

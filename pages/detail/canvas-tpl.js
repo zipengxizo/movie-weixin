@@ -70,6 +70,14 @@ const style = {
     padding:10,
     verticalAlign:'center'
   },
+  imgBox:{
+    width: 300,
+    height: 160,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+
+  }
 }
 
 module.exports = {

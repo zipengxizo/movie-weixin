@@ -84,6 +84,9 @@ Page({
     }).exec();
   },
   onLoad: function () {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     let { cityId, currentTab } = this.data;
     let storegeCityId = wx.getStorageSync('cityId');
     let storeCityName = wx.getStorageSync('cityName');
@@ -93,11 +96,11 @@ Page({
     };
     let params = { cityId: cityId };
     wx.showLoading();
-    this.fetchOnMovie(params, currentTab).then(()=>{
+    this.fetchOnMovie(params, currentTab).then(() => {
       wx.hideLoading();
     })
   },
-  onShow:function(){
+  onShow: function () {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
@@ -161,26 +164,26 @@ Page({
         wx.setStorageSync('cartCout', 1);
       }
       this.getTabBar() && this.getTabBar().setData({ cartCount: cartCout });
-      let windowWidth,windowHeight;
+      let windowWidth, windowHeight;
       try {
         const res = wx.getSystemInfoSync();
-        windowWidth = res.windowWidth,windowHeight = res.windowHeight;
+        windowWidth = res.windowWidth, windowHeight = res.windowHeight;
       } catch (error) {
         console.log(err)
       }
-      let x = e.detail.x,y = e.detail.y;
+      let x = e.detail.x, y = e.detail.y;
       // let clientX = e.changedTouches[0].clientX,clientY = e.changedTouches[0].clientY;
       let animation = wx.createAnimation({
         delay: 0,
-        timingFunction:'ease-in'
+        timingFunction: 'ease-in'
       });
-      animation.translate(x,y).step();//初始点
-      animation.translate(windowWidth/2,windowHeight/2).opacity(1).scale(3,3).step();//中间点
-      animation.translate(windowWidth-120,windowHeight).opacity(0).scale(1,1).step();//购物车
+      animation.translate(x, y).step();//初始点
+      animation.translate(windowWidth / 2, windowHeight / 2).opacity(1).scale(3, 3).step();//中间点
+      animation.translate(windowWidth - 120, windowHeight).opacity(0).scale(1, 1).step();//购物车
       this.setData({
-        animation : animation.export()
+        animation: animation.export()
       });
-      wx.nextTick(()=>{
+      wx.nextTick(() => {
         wx.showToast({
           title: '预定成功',
           icon: 'none',
@@ -189,14 +192,14 @@ Page({
       })
     }
   },
-  onPageScroll:function(e){
-    let {scrollTop} = e;
-    let {backToTopShow} = this.data;
+  onPageScroll: function (e) {
+    let { scrollTop } = e;
+    let { backToTopShow } = this.data;
     if (!backToTopShow && scrollTop > 400) {
-      this.setData({backToTopShow:true});
+      this.setData({ backToTopShow: true });
     }
     if (backToTopShow && scrollTop === 0) {
-      this.setData({backToTopShow:false});
+      this.setData({ backToTopShow: false });
     }
   },
   fetchComingMovie(params, index, order = 0) {
