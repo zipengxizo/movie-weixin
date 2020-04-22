@@ -64,11 +64,12 @@ Component({
         return imgtpl.replace(/{{img}}/g,item)
       });
       copyWxml = copyWxml.replace(/{{{photos}}}/g,imgtplArr.join(''));
-      console.log(copyWxml);
+      console.log(copyWxml); */
       
       let { windowWidth } = wx.getSystemInfoSync();
       copyStyle.container.width = copyStyle.first.width = copyStyle.secend.width = copyStyle.text.width = windowWidth -48;
-      let photosHeight = this.data.photos.length * 160;
+      
+      /* let photosHeight = this.data.photos.length * 160;
       this.createSelectorQuery().select('.detail_intro').boundingClientRect((rect) => {
         copyStyle.secend.height = copyStyle.text.height = rect.height;
         copyStyle.container.height = 160 + rect.height + photosHeight;

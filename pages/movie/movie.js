@@ -10,7 +10,13 @@ Page({
     currentTab: 0,
     bottomShow: false,
     tip: '下拉加载',
-    backToTopShow: false
+    backToTopShow: false,
+    dialogShow:false,
+    buttons: [{text: '预定',extClass:'ad-button'}],
+    adUrl:null
+  },
+  tapDialogButton(e){
+    this.setData({dialogShow : false});
   },
   swiperTab(e) {
     let currentTab = e.detail.current;
@@ -98,7 +104,12 @@ Page({
     wx.showLoading();
     this.fetchOnMovie(params, currentTab).then(() => {
       wx.hideLoading();
-    })
+      wx.nextTick(()=>{
+      let roundImage = this.data.movieOnList[Math.floor(Math.random()*10+1)].img;
+      roundImage = roundImage.replace(/128.180/g,'320.320');
+      this.setData({adUrl:roundImage});
+      })
+    });
   },
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&
@@ -192,6 +203,9 @@ Page({
       })
     }
   },
+  dailogClose(e){
+    this.setData({dialogShow : false});
+  },
   onPageScroll: function (e) {
     let { scrollTop } = e;
     let { backToTopShow } = this.data;
@@ -205,7 +219,7 @@ Page({
   fetchComingMovie(params, index, order = 0) {
     return new Promise((resolve, reject) => {
       app.api2.getMoiveComing(params).then((res) => {
-        let movieList = res.data.comingList;
+        let movieList = res.data.movieList;
         let changeMovieList = movieList.map((item) => {
           item.img = item.img.replace(/w\.h/, '128.180');
           return item;
@@ -227,7 +241,7 @@ Page({
   },
   fetchOnMovie(params, index, order = 0) {
     return new Promise((resolve, reject) => {
-      app.api2.getMovieOnSelf(params).then((res) => {
+      app.api2.getMovieOn(params).then((res) => {
         let movieList = res.data.movieList;
         let changeMovieList = movieList.map((item) => {
           item.img = item.img.replace(/w\.h/, '128.180');

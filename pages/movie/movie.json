@@ -3,8 +3,12 @@
     "tabbar": "../component/tabbar/tabbar",
     "loading": "../component/loading/loading",
     "mp-sticky": "../component/sticky/index",
-    "back-to-top":"../component/backTotop/backTotop"
+    "back-to-top":"../component/backTotop/backTotop",
+    "mp-dialog":"../component/dialog/dialog"
   },
   "enablePullDownRefresh": true,
-  "onReachBottomDistance": 50
+  "onReachBottomDistance": 50,
+  "options":{
+    "multipleSlots":true
+  }
 }

@@ -6,7 +6,7 @@ promisifyAll(wx, wxp);
 App({
   onLaunch: function () {
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       this.api2.getLocation().then((res) => {
         let msg = res.msg;
         if (msg === 'ok') {
@@ -32,7 +32,7 @@ App({
           })
         }
       });
-    }, 3000);
+    }, 3000); */
 
     wxp.getSetting().then((res)=>{
       if (res.authSetting['scope.userInfo']) {

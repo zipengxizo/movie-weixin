@@ -4,10 +4,10 @@
     "pages/cinema/cinema",
     "pages/detail/detail",
     "pages/login/login",
+    "pages/research/resarch",
     "pages/cart/cart",
     "pages/city/city",
     "pages/center/center",
-    "pages/research/resarch",
     "pages/comingmoive/comingmoive"
   ],
   "tabBar": {

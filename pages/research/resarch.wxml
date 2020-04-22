@@ -5,6 +5,9 @@
   			<input class="input" type="text" value="{{value}}" placeholder="请输入搜索关键字" confirm-type="search" bindinput="rearch" bindfocus="focus" bindblur="blur"></input>
 			<icon wx:if="{{isShow}}" bindtap="clear" type="clear" size="14" class="clear"></icon>
   		</view>
+		<navigator open-type="navigateBack">
+		<text class="cancel">取消</text>
+		</navigator>
   	</view>
   	<view class="search_result">
   		<view class="h3">电影/电视剧/综艺</view>

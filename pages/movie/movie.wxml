@@ -50,4 +50,12 @@
 		<view class="bottom-tip" wx:if="{{bottomShow}}">{{tip}}</view>
 		<back-to-top backToTopShow="{{backToTopShow}}"></back-to-top>
 	</view>
+
+	<mp-dialog ext-class="ad-ext-class" title="推荐影片" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+		<view>
+			<image style="height:200;width:100%" src="{{adUrl}}"></image>
+			<!-- <icon class="iconfont icon-xiasanjiao ad-close"></icon> -->
+			<cover-image class="ad-close" src="../../imgs/close.png" bindtap="dailogClose"></cover-image>
+		</view>
+	</mp-dialog>
 </view>
