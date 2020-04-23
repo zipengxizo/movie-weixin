@@ -3,7 +3,7 @@
  * description: 所有的接口
  */
 import request from './request.js';
-import { baseUrl, baseUrl2,baseUrl3, url } from './base.js';
+import { baseUrl, baseUrl2,baseUrl4, url } from './base.js';
 
 class api {
   constructor() {
@@ -60,7 +60,7 @@ class api {
    * @param {movieId} 查询电影详情
    */
   getMovieDetai(data) {
-    return this._request.getRequest(this._baseUrl + url.movieDetail, data,
+    return this._request.getRequest(baseUrl4 + url.movieDetail, data,
       this._defaultHeader, 'GET').then(res => res.data);
   };
   /**
