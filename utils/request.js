@@ -52,7 +52,7 @@ class request {
         data: data,
         header: header,
         method: method,
-        timeout: 1000 * 10,
+        timeout: 1000 * 16,
         success: (res => {
           if (res.statusCode === 200) {
             //200: 服务端业务处理正常结束
