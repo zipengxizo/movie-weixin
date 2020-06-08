@@ -38,7 +38,7 @@ class api {
    * @param {查询正在上映} data 
    */
   getMovieOn(data) {
-    return this._request.getRequest(this._baseUrl + url.movieOn, data, this._defaultHeader, 'GET').then(res => res.data)
+    return this._request.postRequest(this._baseUrl + url.movieOn, data, this._defaultHeader).then(res => res.data)
   };
 
   /**
@@ -46,14 +46,14 @@ class api {
    * @param {查询正在上映} data 
    */
   getMovieOnSelf(data) {
-    return this._request.getRequest(this._baseUrl + url.movieOnSelf, data, this._defaultHeader, 'GET').then(res => res.data)
+    return this._request.getRequest(this._baseUrl + url.movieOnSelf, data, this._defaultHeader).then(res => res.data)
   };
   /**
    * 查询即将上映
    * @param {*} data 
    */
   getMoiveComing(data) {
-    return this._request.getRequest(this._baseUrl + url.movieComing, data, this._defaultHeader, 'GET').then(res => res.data)
+    return this._request.getRequest(this._baseUrl + url.movieComing, data, this._defaultHeader).then(res => res.data)
   };
   /**
    * 查询电影详情
@@ -61,7 +61,7 @@ class api {
    */
   getMovieDetai(data) {
     return this._request.getRequest(this._baseUrl + url.movieDetail, data,
-      this._defaultHeader, 'GET').then(res => res.data);
+      this._defaultHeader).then(res => res.data);
   };
   /**
    * 查询电影院
@@ -69,14 +69,14 @@ class api {
    */
   getCinemas(data) {
     return this._request.getRequest(this._baseUrl + url.cinemaList, data,
-      this._defaultHeader, 'GET').then(res => res.data);
+      this._defaultHeader).then(res => res.data);
   };
   /**
    * 获取城市
    * @param {*} data 
    */
   getCityList(data) {
-    return this._request.getRequest(this._baseUrl + url.cityList, data, this._defaultHeader, 'GET').then(res => res.data)
+    return this._request.getRequest(this._baseUrl + url.cityList, data, this._defaultHeader).then(res => res.data)
   };
   /**
    * 根据code查询微信登录
@@ -84,7 +84,7 @@ class api {
    */
 
   loginWinxin(data) {
-    return this._request.getRequest(this._baseUrl + url.login, data, this._defaultHeader, 'GET').then(res => res.data);
+    return this._request.getRequest(this._baseUrl + url.login, data, this._defaultHeader).then(res => res.data);
   }
   /**
    * 根据keyword查询电影
@@ -92,14 +92,14 @@ class api {
    */
 
   getRearchMovieList(data){
-    return this._request.getRequest(this._baseUrl + url.rearchMovieList,data,this._defaultHeader,'GET').then(res => res.data);
+    return this._request.getRequest(this._baseUrl + url.rearchMovieList,data,this._defaultHeader).then(res => res.data);
   };
   /**
    * 获取定位
    * @param {*} data 
    */
   getLocation(data){
-    return this._request.getRequest(this._baseUrl + url.locations,data,this._defaultHeader,'GET').then(res=> res.data);
+    return this._request.getRequest(this._baseUrl + url.locations,data,this._defaultHeader).then(res=> res.data);
   }
 }
 export default api
